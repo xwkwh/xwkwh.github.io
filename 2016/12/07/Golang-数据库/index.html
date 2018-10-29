@@ -1,0 +1,714 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Golang 数据库 | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="database/sql 接口Go没有官方提供数据库驱动，而是为开发者开发数据库驱动定义了一些标准接口，开发者可以根据定义的接口来开发相应的数据库驱动    好处：只要按照标准接口开发的代码，以后需要迁移数据库时，不需要任何修改。 sql.Register用来注册数据库驱动第三方数据库驱动开发是，都要实现init函数，在init函数里面会调用 sql.Register(name string,dr">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 数据库">
+<meta property="og:url" content="http://xwkwh.github.io/2016/12/07/Golang-数据库/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="database/sql 接口Go没有官方提供数据库驱动，而是为开发者开发数据库驱动定义了一些标准接口，开发者可以根据定义的接口来开发相应的数据库驱动    好处：只要按照标准接口开发的代码，以后需要迁移数据库时，不需要任何修改。 sql.Register用来注册数据库驱动第三方数据库驱动开发是，都要实现init函数，在init函数里面会调用 sql.Register(name string,dr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-28T15:57:36.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Golang 数据库">
+<meta name="twitter:description" content="database/sql 接口Go没有官方提供数据库驱动，而是为开发者开发数据库驱动定义了一些标准接口，开发者可以根据定义的接口来开发相应的数据库驱动    好处：只要按照标准接口开发的代码，以后需要迁移数据库时，不需要任何修改。 sql.Register用来注册数据库驱动第三方数据库驱动开发是，都要实现init函数，在init函数里面会调用 sql.Register(name string,dr">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/12/07/Golang-数据库/" title="Golang 数据库" itemprop="url">Golang 数据库</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-12-07T06:30:04.000Z" itemprop="datePublished"> Published 2016-12-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#database-sql-接口"><span class="toc-number">1.</span> <span class="toc-text">database/sql 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sql-Register"><span class="toc-number">1.1.</span> <span class="toc-text">sql.Register</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Driver"><span class="toc-number">1.2.</span> <span class="toc-text">driver.Driver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Conn"><span class="toc-number">1.3.</span> <span class="toc-text">driver.Conn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Stmt"><span class="toc-number">1.4.</span> <span class="toc-text">driver.Stmt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Tx"><span class="toc-number">1.5.</span> <span class="toc-text">driver.Tx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Execer"><span class="toc-number">1.6.</span> <span class="toc-text">driver.Execer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Result"><span class="toc-number">1.7.</span> <span class="toc-text">driver.Result</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Rows"><span class="toc-number">1.8.</span> <span class="toc-text">driver.Rows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-RowsAffected"><span class="toc-number">1.9.</span> <span class="toc-text">driver.RowsAffected</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Value"><span class="toc-number">1.10.</span> <span class="toc-text">driver.Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-ValueConverter"><span class="toc-number">1.11.</span> <span class="toc-text">driver.ValueConverter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Valuer"><span class="toc-number">1.12.</span> <span class="toc-text">driver.Valuer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#database-sql"><span class="toc-number">1.13.</span> <span class="toc-text">database/sql</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="database-sql-接口"><a href="#database-sql-接口" class="headerlink" title="database/sql 接口"></a>database/sql 接口</h2><p>Go没有官方提供数据库驱动，而是为开发者开发数据库驱动定义了一些标准接口，开发者可以根据定义的接口来开发相应的数据库驱动<br>    <strong>好处</strong>：只要按照标准接口开发的代码，以后需要迁移数据库时，不需要任何修改。</p>
+<h3 id="sql-Register"><a href="#sql-Register" class="headerlink" title="sql.Register"></a>sql.Register</h3><p>用来注册数据库驱动<br>第三方数据库驱动开发是，都要实现init函数，在init函数里面会调用</p>
+<pre><code>sql.Register(name string,driver driver.Driver)
+</code></pre><p>完成驱动注册</p>
+<p>例如：sqlite3、mymysql的驱动注册</p>
+<pre><code>//https://github.com/mattn/go-sqlite3 驱动
+func init() {
+sql.Register(&quot;sqlite3&quot;, &amp;SQLiteDriver{})
+}
+//https://github.com/mikespook/mymysql 驱动
+// Driver automatically registered in database/sql
+var d = Driver{proto: &quot;tcp&quot;, raddr: &quot;127.0.0.1:3306&quot;}
+func init() {
+Register(&quot;SET NAMES utf8&quot;)
+sql.Register(&quot;mymysql&quot;, &amp;d)
+}
+</code></pre><p>在 database/sql 内部通过一个 map 来存储用户定义的相应驱动</p>
+<pre><code>var drivers = make(map[string]driver.Driver)
+
+drivers[name] = driver
+</code></pre><p>因此通过database/sql 的注册函数可以同时注册多个数据库驱动，只要不重复</p>
+<p>使用【import _ 包路径】只是引用该包，仅仅是为了调用init()函数，所以无法通过包名来调用包中的其他函数</p>
+<pre><code>import (
+&quot;database/sql&quot;
+_ &quot;github.com/mattn/go-sqlite3&quot;
+)
+</code></pre><h3 id="driver-Driver"><a href="#driver-Driver" class="headerlink" title="driver.Driver"></a>driver.Driver</h3><p>Driver是一个数据库驱动的接口<br>定义了一个方法： Open(name string) 返回一个数据库的Conn接口</p>
+<pre><code>type Driver interface {
+     Open(name string) (Conn, error)
+}
+</code></pre><p>返回的Conn只能执行一次goroutine操作，就是说不能把这个Conn应用于多个goroutine里面</p>
+<h3 id="driver-Conn"><a href="#driver-Conn" class="headerlink" title="driver.Conn"></a>driver.Conn</h3><p>Conn 是一个数据库连接的接口定义，定义了一系列方法</p>
+<pre><code>type Conn interface {
+    Prepare(query string) (Stmt, error)
+    Close() error
+    Begin() (Tx, error)
+}
+</code></pre><p>Prepare函数返回与当前连接相关的执行 Sql 语句的准备状态，可以进行查询、删除等操作。</p>
+<p>Close 函数关闭当前的连接，执行释放连接拥有的资源等清理工作。因为驱动实现了<br>database/sql 里面建议的conn pool，所以你不用再去实现缓存 conn 之类的，这样会容易<br>引起问题。</p>
+<p>Begin 函数返回一个代表事务处理的 Tx，通过它你可以进行查询,更新等操作，或者对事务<br>进行回滚、递交</p>
+<h3 id="driver-Stmt"><a href="#driver-Stmt" class="headerlink" title="driver.Stmt"></a>driver.Stmt</h3><p>Stmt是一种准备好的状态，和Conn 相关联，而且只能应用于一个 goroutine 中，不能应<br>用于多个goroutine</p>
+<pre><code>type Stmt interface {
+    Close() error
+    NumInput() int
+    Exec(args []Value) (Result, error)
+    Query(args []Value) (Rows, error)
+}
+</code></pre><p>Close 函数关闭当前的链接状态，但是如果当前正在执行 query，query 还是有效返回 rows<br>数据。</p>
+<p>NumInput 函数返回当前预留参数的个数，当返回&gt;=0时数据库驱动就会智能检查调用者的<br>参数。当数据库驱动包不知道预留参数的时候，返回-1。</p>
+<p>Exec 函数执行Prepare准备好的sql，传入参数执行update/insert 等操作，<strong>返回 Result 数<br>据</strong></p>
+<p>Query 函数执行Prepare准备好的 sql，传入需要的参数执行 select 操作，<strong>返回 Rows 结果<br>集</strong></p>
+<h3 id="driver-Tx"><a href="#driver-Tx" class="headerlink" title="driver.Tx"></a>driver.Tx</h3><p>事务处理一般就两个过程，<strong>递交</strong>或者<strong>回滚</strong>。数据库驱动里面也只需要实现这两个函数就可以</p>
+<pre><code>type Tx interface {
+    Commit() error
+    Rollback() error
+}
+</code></pre><p>Commit 递交一个事务<br>Rollback 回滚一个事务</p>
+<p>数据库事务：对数据库所做的一系列修改，<strong>在修改过程中，暂时不写入数据库，而是缓存起来</strong>，用户在自己的终端可以预览变化，直到全部修改完成，并经过检查确认无误后，<strong>一次性提交并写入数据库</strong>，在提交之前，必要的话所做的修改<strong>都可以取消</strong>。提交之后，就不能撤销，提交成功后其他用户才可以通过查询浏览数据的变化。</p>
+<h3 id="driver-Execer"><a href="#driver-Execer" class="headerlink" title="driver.Execer"></a>driver.Execer</h3><p>Conn 可选择实现的一个接口</p>
+<pre><code>type Execer interface {
+    Exec(query string, args []Value) (Result, error)
+}
+</code></pre><p>如果这个接口没有定义，那么在调用DB.Exec 就会先调用Prepare 返回Stmt，然后执行Stmt的Exec，然后关闭Stmt</p>
+<h3 id="driver-Result"><a href="#driver-Result" class="headerlink" title="driver.Result"></a>driver.Result</h3><p>Update/insert 等操作返回的结果接口定义</p>
+<pre><code>type Result interface {
+    LastInsertId() (int64, error)  //返回由数据库执行插入操作得到的自增 ID 号
+    RowsAffected() (int64, error)  //返回 query 操作影响的数据条目数
+}
+</code></pre><h3 id="driver-Rows"><a href="#driver-Rows" class="headerlink" title="driver.Rows"></a>driver.Rows</h3><p>执行查询返回的结果接口定义</p>
+<pre><code>type Rows interface {
+    Columns() []string
+    Close() error
+    Next(dest []Value) error
+}
+</code></pre><p>Columns 函数返回查询数据库表的字段信息，这个返回的slice <strong>和 sql 查询的字段</strong>一一对应，<br>而不是返回整个表的所有字段。</p>
+<p>Close 函数用来关闭Rows迭代器。</p>
+<p>Next函数用来返回下一条数据，把数据赋值给 dest。dest里面的元素必须是driver.Value的<br>值除了string，返回的数据里面所有的 string都必须要转换成[]byte。如果最后没数据了，<br>Next函数最后返回 io.EOF</p>
+<h3 id="driver-RowsAffected"><a href="#driver-RowsAffected" class="headerlink" title="driver.RowsAffected"></a>driver.RowsAffected</h3><pre><code>type RowsAffected int64
+func (RowsAffected) LastInsertId() (int64, error)
+func (v RowsAffected) RowsAffected() (int64, error)
+</code></pre><p>其实就是int64 的别名，但是实现了Result接口，用来底层实现Result的表示方式</p>
+<h3 id="driver-Value"><a href="#driver-Value" class="headerlink" title="driver.Value"></a>driver.Value</h3><p>Value其实就是一个<strong>空接口</strong>，他可以容纳<strong>任何的数据</strong></p>
+<pre><code>type Value interface{}
+</code></pre><p>drive的Value是驱动必须能够操作的Value，Value要么<strong>是 nil，要么是下面的任意一种</strong></p>
+<pre><code>int64
+float64
+bool
+[]byte
+string [*]除了Rows.Next 返回的不能是 string.
+time.Time
+</code></pre><h3 id="driver-ValueConverter"><a href="#driver-ValueConverter" class="headerlink" title="driver.ValueConverter"></a>driver.ValueConverter</h3><p>ValueConverter 接口定义了如何把一个普通的值转化成 driver.Value的接口</p>
+<pre><code>type ValueConverter interface {
+     ConvertValue(v interface{}) (Value, error)
+}
+</code></pre><p>在开发的数据库驱动包里面实现这个接口的函数在很多地方会使用到，这个ValueConverter 有很多<strong>好处</strong>：<br>• 转化driver.value到数据库表相应的字段，例如 int64 的数据如何转化成数据库表uint16字段<br>• 把数据库查询结果转化成driver.Value值<br>• 在scan 函数里面如何把 dirve.Value 值转化成用户定义的值</p>
+<h3 id="driver-Valuer"><a href="#driver-Valuer" class="headerlink" title="driver.Valuer"></a>driver.Valuer</h3><p>Valuer 接口定义了返回一个 driver.Value 的方式</p>
+<pre><code>type Valuer interface {
+    Value() (Value, error)
+}
+</code></pre><p>很多类型都实现了这个Value方法，用来自身与 driver.Value 的转化。<br>通过上面的讲解，你应该对于驱动的开发有了一个基本的了解，一个驱动只要实现了<strong>这些<br>接口就能完成增删查改等基本操作了</strong>，剩下的就是与相应的数据库进行数据交互等细节问<br>题了，在此不再赘述。</p>
+<h3 id="database-sql"><a href="#database-sql" class="headerlink" title="database/sql"></a>database/sql</h3><p>database/sql 在database/sql/driver 提供的接口基础上定义了一些更高阶的方法，用以简<br>化数据库操作,同时内部还建议性地实现一个 conn pool。</p>
+<pre><code>type DB struct {
+    driver driver.Driver
+    dsn string
+    mu sync.Mutex // protects freeConn and closed
+    freeConn []driver.Conn
+    closed bool
+}
+</code></pre><p>我们可以看到Open 函数返回的是 DB 对象，里面有一个 freeConn，它就是那个简易的连<br>接池。它的实现相当简单或者说简陋，就是当执行 Db.prepare 的时候会 defer<br>db.putConn(ci, err) ,也就是把这个连接放入连接池，每次调用 conn 的时候会先判断<br>freeConn 的长度是否大于0，大于0说明有可以复用的 conn，直接拿出来用就是了，如果<br>不大于0，则创建一个conn,然后再返回之。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Golang/">Golang</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Golang/">Golang</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2016/12/07/Golang-数据库/" data-title="Golang 数据库 | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2018/06/07/Golang/" title="Golang面试总结">
+  <strong>上一篇：</strong><br>
+  <span>
+  Golang面试总结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/12/07/SVN基础/" title="SVN基础">
+ <strong>下一篇：</strong><br> 
+ <span>SVN基础
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#database-sql-接口"><span class="toc-number">1.</span> <span class="toc-text">database/sql 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sql-Register"><span class="toc-number">1.1.</span> <span class="toc-text">sql.Register</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Driver"><span class="toc-number">1.2.</span> <span class="toc-text">driver.Driver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Conn"><span class="toc-number">1.3.</span> <span class="toc-text">driver.Conn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Stmt"><span class="toc-number">1.4.</span> <span class="toc-text">driver.Stmt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Tx"><span class="toc-number">1.5.</span> <span class="toc-text">driver.Tx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Execer"><span class="toc-number">1.6.</span> <span class="toc-text">driver.Execer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Result"><span class="toc-number">1.7.</span> <span class="toc-text">driver.Result</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Rows"><span class="toc-number">1.8.</span> <span class="toc-text">driver.Rows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-RowsAffected"><span class="toc-number">1.9.</span> <span class="toc-text">driver.RowsAffected</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Value"><span class="toc-number">1.10.</span> <span class="toc-text">driver.Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-ValueConverter"><span class="toc-number">1.11.</span> <span class="toc-text">driver.ValueConverter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#driver-Valuer"><span class="toc-number">1.12.</span> <span class="toc-text">driver.Valuer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#database-sql"><span class="toc-number">1.13.</span> <span class="toc-text">database/sql</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

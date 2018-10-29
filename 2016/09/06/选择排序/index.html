@@ -1,0 +1,665 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>选择排序 | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="选择排序分为 简单选择排序 和 堆排序 简单选择排序public static void selectSort(int[] a) {     int len = a.length;     for (int k = 0; k &amp;lt; len; k++) {         int min = k;         for (int i = k + 1; i &amp;lt; len; i++) {">
+<meta name="keywords" content="排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="选择排序">
+<meta property="og:url" content="http://xwkwh.github.io/2016/09/06/选择排序/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="选择排序分为 简单选择排序 和 堆排序 简单选择排序public static void selectSort(int[] a) {     int len = a.length;     for (int k = 0; k &amp;lt; len; k++) {         int min = k;         for (int i = k + 1; i &amp;lt; len; i++) {">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-28T15:57:36.134Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="选择排序">
+<meta name="twitter:description" content="选择排序分为 简单选择排序 和 堆排序 简单选择排序public static void selectSort(int[] a) {     int len = a.length;     for (int k = 0; k &amp;lt; len; k++) {         int min = k;         for (int i = k + 1; i &amp;lt; len; i++) {">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/09/06/选择排序/" title="选择排序" itemprop="url">选择排序</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-09-06T12:11:20.000Z" itemprop="datePublished"> Published 2016-09-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单选择排序"><span class="toc-number">1.</span> <span class="toc-text">简单选择排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆排序"><span class="toc-number">2.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆排序-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">堆排序</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>选择排序分为 <strong>简单选择排序</strong> 和 <strong>堆排序</strong></p>
+<h2 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h2><pre><code>public static void selectSort(int[] a) {
+    int len = a.length;
+    for (int k = 0; k &lt; len; k++) {
+        int min = k;
+        for (int i = k + 1; i &lt; len; i++) {
+            if (a[i] &lt; a[min]) {
+                min = i;
+            }
+        }
+        if (k != min) {
+            int temp = a[k];
+            a[k] = a[min];
+            a[min] = temp;
+        }
+    }
+    printSort(a);
+}
+</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>堆 一般指<strong>二叉堆</strong>，(由于其它几种堆（二项式堆，斐波纳契堆等）用的较少，一般将二叉堆就简称为<br>堆), 二叉堆是完全二叉树或近似完全二叉树</p>
+<p>特性：</p>
+<ul>
+<li>父节点 总是 大于或等于（小于或等于） 任何一个子节点</li>
+<li>每个节点的左右子树都是一个二叉堆（大根堆 /小根堆）</li>
+</ul>
+<p>存储：一般用数组存储，i节点的父节点的下标为 （i-1）/2</p>
+<pre><code>它的左右子节点为 2*i+1 , 2*i+2
+</code></pre><p>操作：<br>建堆 刚开始的数组,对应的树不是堆，需要将其堆化，依次将父节点的值与子节点中最大（小）的值比较，交换<br>插入 插入到堆末，这时堆已经乱了次序，需要再次更新 堆化<br>删除 删除节点总是发生在根节点 a[0]， 删除后将最后一个节点交换上来，再次更新，堆化</p>
+<h4 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h4><pre><code>public static void headSort(int[] a) {
+    for (int i = 0; i &lt; a.length; i++) {
+        createMaxHeap(a, a.length - 1 - i); //堆化 大根堆 
+        swap(a, 0, a.length - 1 - i); //大根堆的节点是最大的，将其放到最后
+        printSort(a);
+    }
+}
+
+private static void createMaxHeap(int[] a, int lastIndex) {
+    for (int i = (lastIndex - 1) / 2; i &gt;= 0; i--) {
+        // 保存当前正在判断的节点
+        int k = i;
+        // 若当前结点的子节点存在
+        while (2 * k + 1 &lt;= lastIndex) {
+            // biggerIndex 总是记录较大节点的值，先赋值为 当前判断节点的子节点
+            int biggerIndex = 2 * k + 1;
+            if (biggerIndex &lt; lastIndex) {
+                // 若右子节点存在，否则此时biggerIndex应该等于lastIndex
+                if (a[biggerIndex] &lt; a[biggerIndex + 1]) {
+                    // 若右子节点值比左节点大，则biggerIndex记录的是右子节点的值
+                    biggerIndex++;
+                }
+            }
+            if (a[k] &lt; a[biggerIndex]) {
+                // 若当前节点值比子节点最大值小，则交换二者的值，交换后将biggerIndex的值付给k
+                swap(a, k, biggerIndex);
+                k = biggerIndex;
+            } else {
+                break;
+            }
+        }
+    }
+}
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/排序/">排序</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2016/09/06/选择排序/" data-title="选择排序 | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/09/06/Two-Sum/" title="Two Sum">
+  <strong>上一篇：</strong><br>
+  <span>
+  Two Sum</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/09/06/交换排序/" title="交换排序">
+ <strong>下一篇：</strong><br> 
+ <span>交换排序
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单选择排序"><span class="toc-number">1.</span> <span class="toc-text">简单选择排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆排序"><span class="toc-number">2.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆排序-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">堆排序</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

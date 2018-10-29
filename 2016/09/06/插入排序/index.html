@@ -1,0 +1,691 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>插入排序 | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1 将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。 i++并重复第二步直到">
+<meta name="keywords" content="排序,插入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插入排序">
+<meta property="og:url" content="http://xwkwh.github.io/2016/09/06/插入排序/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1 将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。 i++并重复第二步直到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-28T15:57:36.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="插入排序">
+<meta name="twitter:description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1 将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。 i++并重复第二步直到">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/09/06/插入排序/" title="插入排序" itemprop="url">插入排序</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-09-06T12:07:07.000Z" itemprop="datePublished"> Published 2016-09-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单插入排序-三种实现"><span class="toc-number">1.</span> <span class="toc-text">简单插入排序 (三种实现)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#希尔排序（俩种实现）"><span class="toc-number">2.</span> <span class="toc-text">希尔排序（俩种实现）</span></a></li></ol>
+		
+		</div>
+		
+		<p>插入排序分为 简单插入排序 和 希尔排序</p>
+<h2 id="简单插入排序-三种实现"><a href="#简单插入排序-三种实现" class="headerlink" title="简单插入排序 (三种实现)"></a>简单插入排序 (三种实现)</h2><p><strong>基本思想：</strong><br>每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成<br>为止。<br>设数组为 a[0…n-1]。</p>
+<ol>
+<li>初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1</li>
+<li>将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。</li>
+<li><p>i++并重复第二步直到 i==n-1。排序完成。</p>
+<p><em>按定义来比较麻烦,代码多</em>  </p>
+<p> public static void insertSort1(int[] data) {</p>
+<pre><code>int i, j, k;
+for (i = 1; i &lt; data.length; i++) {
+    // 为a[i]在前面的a[0...i-1]有序区间中找一个合适的位置
+    for (j = i - 1; j &gt;=0; j--) {
+        if (data[j] &lt; data[i])
+            break;
+    }
+    // 如找到了一个合适的位置
+    if (j != i - 1) {
+        int temp = data[i];
+        // 将比a[i]大的数据向后移
+        for(k=i-1;k&gt;j;k--)
+        data[k+1] = data[k];                
+        // 将a[i]放到正确位置上
+        data[j+1] = temp;
+    }
+}
+printSort(data);//封装好的一个函数用来打印数组
+</code></pre><p> }</p>
+</li>
+</ol>
+<p><em>将后移和搜索放在一起</em></p>
+<pre><code>public static void insertSort2(int[] data){
+    int i,j;
+    for(i=1;i&lt;data.length;i++){
+        int temp = data[i];
+        if(data[i-1]&gt;data[i]){
+            for(j=i-1;j&gt;=0 &amp;&amp; data[j]&gt;temp;j--){
+                data[j+1]= data[j];
+            }
+            data[j+1] = temp;
+        }
+    }
+    printSort(data);
+}
+</code></pre><p><em>用数据交换代替位置后移</em></p>
+<pre><code>public static void insertSort3(int[] data){
+    int i,j;
+    for(i=1;i&lt;data.length;i++){
+        for(j=i-1;j &gt;=0 &amp;&amp; data[j]&gt;data[j+1];j--){
+            swap(data, j, j+1);
+        }
+    }
+    printSort(data);
+}
+</code></pre><h2 id="希尔排序（俩种实现）"><a href="#希尔排序（俩种实现）" class="headerlink" title="希尔排序（俩种实现）"></a>希尔排序（俩种实现）</h2><p>希尔排序的实质就是分组插入排序，该方法又称缩小增量排序，因 DL．Shell于 1959 年提出而得名。</p>
+<p><strong>基本思想：</strong> </p>
+<ul>
+<li>先将整个待排元素序列分割成若干个子序列（<strong>由相隔某个“增量”的元素组成的</strong>）分别进行直接插入排序，</li>
+<li>然后依次缩减增量再进行排序，</li>
+<li>待整个序列中的元素基本有序（增量足够小）时，</li>
+<li>再对全体元素进行一次直接插入排序。因为直接插入排序在元素基本有序的情况下（接近最好情况），效率是</li>
+<li>很高的，因此希尔排序在时间效率上比前两种方法有较大提高。</li>
+</ul>
+<pre><code>static void  shellSort3(int[] data){
+    int i,j,gap;
+    for(gap = data.length;gap&gt;0;gap /=2){  //步长  及其变化  直到变为0  最后变成直接插入排序
+        for(i=0;i&lt;gap;i++){   //按组排序
+            for(j= i+gap;j&lt;data.length;j+=gap){
+                for(int k=j-gap;k&gt;=0 &amp;&amp; data[k]&gt;data[k+gap];k-=gap)
+                    swap(data, k, k+gap);
+            }
+        }
+    }
+}
+
+
+static void shellSort4(int[] data){
+    int i,j,gap;
+    for (gap=data.length/2;gap&gt;0;gap/=2){   
+        for(i=gap;i&lt;data.length;i++){    //变得是这里 从数组第gap个元素开始  
+            for(j=i-gap;j&gt;=0 &amp;&amp; data[j]&gt;data[j+gap];j-=gap){  //每个元素与自己组内的数据进行直接插入排序
+                swap(data, j, j+gap);
+            }
+        }
+    }
+    printSort(data);
+}
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/排序/">排序</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a><a href="/tags/插入/">插入</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2016/09/06/插入排序/" data-title="插入排序 | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/09/06/交换排序/" title="交换排序">
+  <strong>上一篇：</strong><br>
+  <span>
+  交换排序</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/09/02/转圈打印矩阵/" title="转圈打印矩阵">
+ <strong>下一篇：</strong><br> 
+ <span>转圈打印矩阵
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单插入排序-三种实现"><span class="toc-number">1.</span> <span class="toc-text">简单插入排序 (三种实现)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#希尔排序（俩种实现）"><span class="toc-number">2.</span> <span class="toc-text">希尔排序（俩种实现）</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

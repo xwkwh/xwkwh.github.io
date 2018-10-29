@@ -1,0 +1,733 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Linux常用命令 | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="Linux常用命令一、文件目录 ls 查看目录文件  cd 改变路径  pwd  显示当前路径  mkdir  新建路径  rm  删除文件 1234-f, –force 		  忽略不存在的文件，从不给出提示。 -i, –interactive   进行交互式删除 -r, -R, –recursive 指示rm将参数中列出的全部目录和子目录均递归地删除。 -v, –verbose       详">
+<meta name="keywords" content="计算机,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="http://xwkwh.github.io/2018/06/21/Linux常用命令/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="Linux常用命令一、文件目录 ls 查看目录文件  cd 改变路径  pwd  显示当前路径  mkdir  新建路径  rm  删除文件 1234-f, –force 		  忽略不存在的文件，从不给出提示。 -i, –interactive   进行交互式删除 -r, -R, –recursive 指示rm将参数中列出的全部目录和子目录均递归地删除。 -v, –verbose       详">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-28T15:57:36.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令">
+<meta name="twitter:description" content="Linux常用命令一、文件目录 ls 查看目录文件  cd 改变路径  pwd  显示当前路径  mkdir  新建路径  rm  删除文件 1234-f, –force 		  忽略不存在的文件，从不给出提示。 -i, –interactive   进行交互式删除 -r, -R, –recursive 指示rm将参数中列出的全部目录和子目录均递归地删除。 -v, –verbose       详">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/21/Linux常用命令/" title="Linux常用命令" itemprop="url">Linux常用命令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-06-21T13:10:26.000Z" itemprop="datePublished"> Published 2018-06-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux常用命令"><span class="toc-number">1.</span> <span class="toc-text">Linux常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、文件目录"><span class="toc-number">1.1.</span> <span class="toc-text">一、文件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、查找"><span class="toc-number">1.2.</span> <span class="toc-text">二、查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、压缩解压"><span class="toc-number">1.3.</span> <span class="toc-text">三、压缩解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、文件权限"><span class="toc-number">1.4.</span> <span class="toc-text">四、文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、磁盘存储进程"><span class="toc-number">1.5.</span> <span class="toc-text">五、磁盘存储进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、网络"><span class="toc-number">1.6.</span> <span class="toc-text">六、网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、其他"><span class="toc-number">1.7.</span> <span class="toc-text">七、其他</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="一、文件目录"><a href="#一、文件目录" class="headerlink" title="一、文件目录"></a>一、文件目录</h3><ol>
+<li><p>ls 查看目录文件</p>
+</li>
+<li><p>cd 改变路径</p>
+</li>
+<li><p>pwd  显示当前路径</p>
+</li>
+<li><p>mkdir  新建路径</p>
+</li>
+<li><p>rm  删除文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-f, –force 		  忽略不存在的文件，从不给出提示。 </span><br><span class="line">-i, –interactive   进行交互式删除 </span><br><span class="line">-r, -R, –recursive 指示rm将参数中列出的全部目录和子目录均递归地删除。 </span><br><span class="line">-v, –verbose       详细显示进行的步骤</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mv  移动文件</p>
+</li>
+<li><p>cp  复制</p>
+</li>
+<li><p>touch  ： 新建空文件</p>
+</li>
+<li><p>cat：打印输出</p>
+</li>
+<li><p>nl：统计输入中的行号，和cat -n类似但有差别</p>
+</li>
+<li><p>more / less ：分页显示内容</p>
+</li>
+<li><p>head/tail ： 显示文件的头和尾内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt;：指定显示头部内容的行数；</span><br><span class="line">-c&lt;字符数&gt;：指定显示头部内容的字符数；</span><br><span class="line">-v：总是显示文件名的头信息；</span><br><span class="line">-q：不显示文件名的头信息。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="二、查找"><a href="#二、查找" class="headerlink" title="二、查找"></a>二、查找</h3><ol>
+<li><p>which：在PATH变量指定的路径中，搜索某个系统命令的位置 </p>
+</li>
+<li><p>whereis：用于程序名的搜索， </p>
+</li>
+<li><p>locate 相当于find -name的缩写  <strong>locate 路径 </strong> </p>
+</li>
+<li><p>find: find   path   -optio</p>
+</li>
+<li><p>grep：Global Regular Expression Prin 可以<strong>指定文件中搜索特定的内容，并将含有这些内容的行标准输出</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">－c：只输出匹配行的计数。</span><br><span class="line">－I：不区分大小写（只适用于单字符）。</span><br><span class="line">－h：查询多文件时不显示文件名。</span><br><span class="line">－l：查询多文件时只输出包含匹配字符的文件名。</span><br><span class="line">－n：显示匹配行及行号。</span><br><span class="line">－s：不显示不存在或无匹配文本的错误信息。</span><br><span class="line">－v：显示不包含匹配文本的所有行。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="三、压缩解压"><a href="#三、压缩解压" class="headerlink" title="三、压缩解压"></a>三、压缩解压</h3><ol>
+<li>tar</li>
+<li>zip</li>
+</ol>
+<h3 id="四、文件权限"><a href="#四、文件权限" class="headerlink" title="四、文件权限"></a>四、文件权限</h3><ol>
+<li><p>chmod</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r=4,w=2,x=1</span><br><span class="line">chmod xxx filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>chgrp 更改文件拥有组 </p>
+</li>
+<li><p>chown 更改文件拥有者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown [-R] user dir/file</span><br><span class="line">chown [-R] user:group dir/file</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="五、磁盘存储进程"><a href="#五、磁盘存储进程" class="headerlink" title="五、磁盘存储进程"></a>五、磁盘存储进程</h3><ol>
+<li><p>top ：性能分析工具，能够实时显示系统中各个进程的资源占用状况 </p>
+</li>
+<li><p>ps：瞬间进程 (process) 的动态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ps [options] [--help]</span><br><span class="line"></span><br><span class="line">-A：列出所有的进程。 </span><br><span class="line">-l：显示长列表。 </span><br><span class="line">-m：显示内存信息。 </span><br><span class="line">-w：显示加宽可以显示较多的信息。 </span><br><span class="line">-e：显示所有进程。 </span><br><span class="line">a：显示终端上的所有进程,包括其它用户的进程。 </span><br><span class="line">-au：显示较详细的信息。 </span><br><span class="line">-aux：显示所有包含其它使用者的进程。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>free： 显示内存使用</p>
+</li>
+<li><p>pmap :可以根据进程查看进程相关信息占用的内存情况，(进程号可以通过ps查看)如下所示： </p>
+<p><code>pmap -d 14596</code></p>
+</li>
+<li><p>vmstat ：Linux中监控内存的常用工具，可对操作系统的虚拟内存、进程、CPU等的整体情况进行监视. </p>
+</li>
+<li><p>iostat 通过观察设备的活跃时间和他们平均传输率之间的关系来监视系统的输入/输出 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iostat -d -k 1 10         #查看TPS和吞吐量信息(磁盘读写速度单位为KB)</span><br><span class="line">iostat -d -m 2            #查看TPS和吞吐量信息(磁盘读写速度单位为MB)</span><br><span class="line">iostat -d -x -k 1 10      #查看设备使用率（%util）、响应时间（await） iostat -c 1 10 #查看cpu状态</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>lsof</p>
+</li>
+</ol>
+<h3 id="六、网络"><a href="#六、网络" class="headerlink" title="六、网络"></a>六、网络</h3><ol>
+<li><p>ifconfig  查看设置网卡参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 up/down   启用或关闭指定网卡</span><br><span class="line">ifconfig eth0      显示网卡信息</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>route 查看路由以及添加路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route -n  显示路由表</span><br><span class="line">route add/del default gw 192.168.120.1  删除和添加设置默认网关</span><br><span class="line">route add -net 172.25.0.0 netmask 255.255.0.0 dev eth0 添加网关</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ping  测试网络连通性</p>
+</li>
+<li><p>telnet</p>
+</li>
+<li><p>netstat 查看网络状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 netstat</span><br><span class="line">2 netstat -nu 只显示udp / -t只显示tcp</span><br><span class="line">3 netstat -r  显示路由表，作用同route</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>traceroute   查看路由轨迹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">traceroute www.163.com</span><br><span class="line">traceroute -n www.163.com  显示IP地址，不查主机名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rcp</p>
+</li>
+<li><p>scp</p>
+</li>
+<li><p>ss 查看网络状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ss  -s  我想查看当前服务器的网络连接统计</span><br><span class="line">ss -l   我想查看所有打开的网络端口</span><br><span class="line">ss -a   查看这台服务器上所有的socket连接</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>nslookup，dns查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup  baidu.com</span><br><span class="line">nslookup -qt=mx 163.com 8.8.8.8</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h3><ol>
+<li><p>ln </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln /etc/passwd passwd  创建硬链接</span><br><span class="line">ln -s 创建软链接</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>| 管道</p>
+</li>
+<li><p>diff</p>
+</li>
+<li><p>sed： 批处理文本文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep 更适合单纯的查找或匹配文本</span><br><span class="line">sed 更适合编辑匹配到的文本</span><br><span class="line">awk 更适合格式化文本，对文本进行较复杂格式处理</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>date</p>
+</li>
+<li><p>cal</p>
+</li>
+<li><p>wc 统计</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wc [-lwm]</span><br><span class="line">选项：</span><br><span class="line">-l  ：仅列出行；</span><br><span class="line">-w  ：仅列出多少字(英文单字)；</span><br><span class="line">-m  ：多少字符；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>watch</p>
+</li>
+<li><p>at 在一个指定的时间执行一个指定任务，只能执行一次，且需要开启atd进程 </p>
+</li>
+</ol>
+<ol start="10">
+<li>wget</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/计算机/">计算机</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/计算机/">计算机</a><a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2018/06/21/Linux常用命令/" data-title="Linux常用命令 | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2018/06/21/面试碎片/" title="面试碎片">
+  <strong>上一篇：</strong><br>
+  <span>
+  面试碎片</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/06/11/Leetcode 412  FizzBuzz/" title="Leetcode 412  FizzBuzz">
+ <strong>下一篇：</strong><br> 
+ <span>Leetcode 412  FizzBuzz
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux常用命令"><span class="toc-number">1.</span> <span class="toc-text">Linux常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、文件目录"><span class="toc-number">1.1.</span> <span class="toc-text">一、文件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、查找"><span class="toc-number">1.2.</span> <span class="toc-text">二、查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、压缩解压"><span class="toc-number">1.3.</span> <span class="toc-text">三、压缩解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、文件权限"><span class="toc-number">1.4.</span> <span class="toc-text">四、文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、磁盘存储进程"><span class="toc-number">1.5.</span> <span class="toc-text">五、磁盘存储进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、网络"><span class="toc-number">1.6.</span> <span class="toc-text">六、网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、其他"><span class="toc-number">1.7.</span> <span class="toc-text">七、其他</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

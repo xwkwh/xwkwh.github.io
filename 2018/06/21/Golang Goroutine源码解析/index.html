@@ -1,0 +1,622 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Golang Goroutine源码解析 -1 | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="Golang Goroutine源码解析 -1Golang 调度器四个重要结构 ：M P G SchedMPG的结构源码在src/runtime2.go文件中  M （Machine）代表着一个内核线程 一个M就是一个内核线程，goroutine就是跑在M之上的 P 代表着(Processor)处理器 它的主要用途就是用来执行goroutine的，所以它也维护了一个可运行的goroutine队列，">
+<meta name="keywords" content="Golang,goroutine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang Goroutine源码解析 -1">
+<meta property="og:url" content="http://xwkwh.github.io/2018/06/21/Golang Goroutine源码解析/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="Golang Goroutine源码解析 -1Golang 调度器四个重要结构 ：M P G SchedMPG的结构源码在src/runtime2.go文件中  M （Machine）代表着一个内核线程 一个M就是一个内核线程，goroutine就是跑在M之上的 P 代表着(Processor)处理器 它的主要用途就是用来执行goroutine的，所以它也维护了一个可运行的goroutine队列，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i6448038.github.io/img/csp/GMPrelation.png">
+<meta property="og:image" content="https://i6448038.github.io/img/csp/total.png">
+<meta property="og:updated_time" content="2018-10-28T15:57:36.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Golang Goroutine源码解析 -1">
+<meta name="twitter:description" content="Golang Goroutine源码解析 -1Golang 调度器四个重要结构 ：M P G SchedMPG的结构源码在src/runtime2.go文件中  M （Machine）代表着一个内核线程 一个M就是一个内核线程，goroutine就是跑在M之上的 P 代表着(Processor)处理器 它的主要用途就是用来执行goroutine的，所以它也维护了一个可运行的goroutine队列，">
+<meta name="twitter:image" content="https://i6448038.github.io/img/csp/GMPrelation.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/21/Golang Goroutine源码解析/" title="Golang Goroutine源码解析 -1" itemprop="url">Golang Goroutine源码解析 -1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-06-21T13:10:26.000Z" itemprop="datePublished"> Published 2018-06-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Golang-Goroutine源码解析-1"><span class="toc-number">1.</span> <span class="toc-text">Golang Goroutine源码解析 -1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Golang-调度器四个重要结构-：M-P-G-Sched"><span class="toc-number">1.1.</span> <span class="toc-text">Golang 调度器四个重要结构 ：M P G Sched</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="Golang-Goroutine源码解析-1"><a href="#Golang-Goroutine源码解析-1" class="headerlink" title="Golang Goroutine源码解析 -1"></a>Golang Goroutine源码解析 -1</h2><h3 id="Golang-调度器四个重要结构-：M-P-G-Sched"><a href="#Golang-调度器四个重要结构-：M-P-G-Sched" class="headerlink" title="Golang 调度器四个重要结构 ：M P G Sched"></a>Golang 调度器四个重要结构 ：M P G Sched</h3><p>MPG的结构源码在src/runtime2.go文件中</p>
+<ol>
+<li><strong>M</strong> （Machine）代表着一个内核线程 一个M就是一个内核线程，goroutine就是跑在M之上的</li>
+<li><strong>P</strong> 代表着(Processor)处理器 它的主要用途就是用来执行goroutine的，所以它也维护了一个可运行的goroutine队列，和自由的goroutine队列，里面存储了所有需要它来执行的goroutine。</li>
+<li><strong>G</strong> 代表着goroutine 实际的数据结构(就是你封装的那个方法)，并维护者goroutine 需要的栈、程序计数器以及它所在的M等信息。</li>
+<li><strong>Sched</strong> 代表着一个调度器 它维护有存储空闲的M队列和空闲的P队列，可运行的G队列，自由的G队列以及调度器的一些状态信息等。</li>
+</ol>
+<p><strong>M上有P，P里有G，Sched调度M、P、G</strong></p>
+<p>三者关系图：</p>
+<p><img src="https://i6448038.github.io/img/csp/GMPrelation.png" alt="Alt text" title="MPG"></p>
+<p>一个M会对应一个内核线程，一个M也会连接一个上下文P，一个上下文P相当于一个“处理器”，一个上下文连接一个或者多个Goroutine。P(Processor)的数量是在启动时被设置为环境变量GOMAXPROCS的值，或者通过运行时调用函数<code>runtime.GOMAXPROCS()</code>进行设置。 Goroutine中就是我们要执行并发的代码。图中P正在执行的<code>Goroutine</code>为蓝色的；处于待执行状态的<code>Goroutine</code>为灰色的，灰色的<code>Goroutine</code>形成了一个队列<code>runqueues</code> </p>
+<p>三者关系的宏观的图为：</p>
+<p><img src="https://i6448038.github.io/img/csp/total.png" alt="Alt text"></p>
+<p>参考： <a href="https://i6448038.github.io/2017/12/04/golang-concurrency-principle/" target="_blank" rel="noopener">https://i6448038.github.io/2017/12/04/golang-concurrency-principle/</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Golang/">Golang</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Golang/">Golang</a><a href="/tags/goroutine/">goroutine</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2018/06/21/Golang Goroutine源码解析/" data-title="Golang Goroutine源码解析 -1 | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2018/06/24/Cach2go源码学习/" title="Cach2go源码学习">
+  <strong>上一篇：</strong><br>
+  <span>
+  Cach2go源码学习</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/06/21/leetcode解题思路-easy/" title="Leetcode解题思路（easy） 更新ing">
+ <strong>下一篇：</strong><br> 
+ <span>Leetcode解题思路（easy） 更新ing
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Golang-Goroutine源码解析-1"><span class="toc-number">1.</span> <span class="toc-text">Golang Goroutine源码解析 -1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Golang-调度器四个重要结构-：M-P-G-Sched"><span class="toc-number">1.1.</span> <span class="toc-text">Golang 调度器四个重要结构 ：M P G Sched</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

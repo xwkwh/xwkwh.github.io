@@ -1,0 +1,635 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>面试碎片 | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="计算机内存不足 当计算机系统内存不足的时候，系统会自动启用虚拟内存来解决内存不足的问题 所谓虚拟内存 ，就是把硬盘上的一块区域当作物理内存（RAM）来使用 性能：由于硬盘的读写速度和内存时不能比的，所以性能会很差   进程间通信Linux : 管道，消息队列，共享内存，信号量，套接口等等Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、so">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试碎片">
+<meta property="og:url" content="http://xwkwh.github.io/2018/06/21/面试碎片/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="计算机内存不足 当计算机系统内存不足的时候，系统会自动启用虚拟内存来解决内存不足的问题 所谓虚拟内存 ，就是把硬盘上的一块区域当作物理内存（RAM）来使用 性能：由于硬盘的读写速度和内存时不能比的，所以性能会很差   进程间通信Linux : 管道，消息队列，共享内存，信号量，套接口等等Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、so">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-28T15:57:36.134Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试碎片">
+<meta name="twitter:description" content="计算机内存不足 当计算机系统内存不足的时候，系统会自动启用虚拟内存来解决内存不足的问题 所谓虚拟内存 ，就是把硬盘上的一块区域当作物理内存（RAM）来使用 性能：由于硬盘的读写速度和内存时不能比的，所以性能会很差   进程间通信Linux : 管道，消息队列，共享内存，信号量，套接口等等Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、so">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/21/面试碎片/" title="面试碎片" itemprop="url">面试碎片</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-06-21T13:10:26.000Z" itemprop="datePublished"> Published 2018-06-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机内存不足"><span class="toc-number">1.</span> <span class="toc-text">计算机内存不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间通信"><span class="toc-number">2.</span> <span class="toc-text">进程间通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-管道，消息队列，共享内存，信号量，套接口等等"><span class="toc-number">2.1.</span> <span class="toc-text">Linux : 管道，消息队列，共享内存，信号量，套接口等等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows-消息-linux信号-、共享内存、邮件槽（mailslot）-点对点消息队列-、管道、socket、"><span class="toc-number">2.2.</span> <span class="toc-text">Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、socket、</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树种类"><span class="toc-number">3.</span> <span class="toc-text">二叉树种类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#B-树"><span class="toc-number">3.1.</span> <span class="toc-text">B-树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-树-1"><span class="toc-number">3.2.</span> <span class="toc-text">B+树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典树"><span class="toc-number">3.3.</span> <span class="toc-text">字典树</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="计算机内存不足"><a href="#计算机内存不足" class="headerlink" title="计算机内存不足"></a>计算机内存不足</h3><ol>
+<li><p>当计算机系统内存不足的时候，系统会自动启用虚拟内存来解决内存不足的问题</p>
+<p>所谓<strong>虚拟内存</strong> ，就是把硬盘上的一块区域当作物理内存（RAM）来使用</p>
+<p>性能：由于硬盘的读写速度和内存时不能比的，所以性能会很差</p>
+</li>
+</ol>
+<h3 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h3><h4 id="Linux-管道，消息队列，共享内存，信号量，套接口等等"><a href="#Linux-管道，消息队列，共享内存，信号量，套接口等等" class="headerlink" title="Linux : 管道，消息队列，共享内存，信号量，套接口等等"></a>Linux : 管道，消息队列，共享内存，信号量，套接口等等</h4><h4 id="Windows-消息-linux信号-、共享内存、邮件槽（mailslot）-点对点消息队列-、管道、socket、"><a href="#Windows-消息-linux信号-、共享内存、邮件槽（mailslot）-点对点消息队列-、管道、socket、" class="headerlink" title="Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、socket、"></a>Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、socket、</h4><p>​           剪切板、动态数据交换、文件映射、对象链接与嵌入、远程过程调用、动态连接库、WM_COPYDATA</p>
+<h3 id="二叉树种类"><a href="#二叉树种类" class="headerlink" title="二叉树种类"></a>二叉树种类</h3><ul>
+<li><p>满二叉树： </p>
+</li>
+<li><p>完全二叉树：深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在最左边，这就是完全二叉树。 </p>
+</li>
+<li><p>二叉查找树、二叉有序树、</p>
+<p>如果树不是一颗空树的话，那么二叉查找树具有以下特征：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 若左子树不为空，那么左子树所有节点的值小于均小于他的根节点的值。</span><br><span class="line">2. 若右子树不为空，那么右子树的所有节点的值大于根节点的值。</span><br><span class="line">3. 左右子树也分别为二叉排序树。</span><br><span class="line">4. 没有键值相等的节点。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>平衡二叉树</strong> （AVL） :一 棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树 </p>
+</li>
+<li><p><strong>红黑树</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 每个节点要么是红的，要么是黑的</span><br><span class="line">2. 根节点必须是黑的</span><br><span class="line">3. 每个叶子节点是黑的</span><br><span class="line">4. 如果父节点是红的，那么两个子节点是黑的</span><br><span class="line">5. 对于每个节点，从该节点到其子孙节点的所有路径上包含相同数目</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h4><p>B-树是一种多路搜索树</p>
+<p>性质：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 根结点至少有两个子女；</span><br><span class="line"></span><br><span class="line">2. 每个非根节点所包含的关键字个数 j 满足：┌m/2┐ - 1 &lt;= j &lt;= m - 1；</span><br><span class="line">3. 除根结点以外的所有结点（不包括叶子结点）的度数正好是关键字总数加1，故内部子树个数 k 满足：┌m/2┐ &lt;= k &lt;= m ；</span><br><span class="line">4.  所有的叶子结点都位于同一层。</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+树"></a>B+树</h4><p>B+树是B-树的变体，也是一种多路搜索树：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 1.其定义基本与B-树同，除了：</span><br><span class="line"></span><br><span class="line"> 2.非叶子结点的子树指针与关键字个数相同；</span><br><span class="line"></span><br><span class="line">3.非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树</span><br><span class="line"></span><br><span class="line">（B-树是开区间）；</span><br><span class="line"></span><br><span class="line"> 5.为所有叶子结点增加一个链指针；</span><br><span class="line"></span><br><span class="line">6.所有关键字都在叶子结点出现；</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="字典树"><a href="#字典树" class="headerlink" title="字典树"></a>字典树</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.又称单词查找树，Trie树，是一种树形结构，是一种哈希树的变种。</span><br><span class="line">典型应用是用于统计，排序和保存大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。</span><br><span class="line"></span><br><span class="line">2.它的优点是：利用字符串的公共前缀来节约存储空间，最大限度地减少无谓的字符串比较，查询效率比哈希表高。</span><br><span class="line"></span><br><span class="line">3.字典树与字典很相似,当你要查一个单词是不是在字典树中,首先看单词的第一个字母是不是在字典的第一层,如果不在,说明字典树</span><br></pre></td></tr></table></figure></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/面试/">面试</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/面试/">面试</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2018/06/21/面试碎片/" data-title="面试碎片 | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2018/06/21/进程间通信 (Inter Process Communication)/" title="进程间通信 (IPC)">
+  <strong>上一篇：</strong><br>
+  <span>
+  进程间通信 (IPC)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/06/21/Linux常用命令/" title="Linux常用命令">
+ <strong>下一篇：</strong><br> 
+ <span>Linux常用命令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机内存不足"><span class="toc-number">1.</span> <span class="toc-text">计算机内存不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间通信"><span class="toc-number">2.</span> <span class="toc-text">进程间通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-管道，消息队列，共享内存，信号量，套接口等等"><span class="toc-number">2.1.</span> <span class="toc-text">Linux : 管道，消息队列，共享内存，信号量，套接口等等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows-消息-linux信号-、共享内存、邮件槽（mailslot）-点对点消息队列-、管道、socket、"><span class="toc-number">2.2.</span> <span class="toc-text">Windows : 消息(linux信号)、共享内存、邮件槽（mailslot） (点对点消息队列)、管道、socket、</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树种类"><span class="toc-number">3.</span> <span class="toc-text">二叉树种类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#B-树"><span class="toc-number">3.1.</span> <span class="toc-text">B-树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-树-1"><span class="toc-number">3.2.</span> <span class="toc-text">B+树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典树"><span class="toc-number">3.3.</span> <span class="toc-text">字典树</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
