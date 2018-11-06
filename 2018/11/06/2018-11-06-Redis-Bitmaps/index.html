@@ -4,24 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Hexo-log | 邢武坤</title>
+    <title>Redis Bitmaps | 邢武坤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="邢武坤">
     
 
     
-    <meta name="description" content="记录 随笔 知识管理，时间管理，自我管理，阅读，语音写作，思维导图">
+    <meta name="description" content="BitmapsBitmaps 在redis中本身不是数据结构，实际上它就是字符串，但是他可以对字符串的位进行操作 bitmaps单独提供了一套命令和string的使用不太相同 命令 设置值 1setbit key offset value offset为相对偏移量，返回的值为该位原来的值  获取值 1getbit key offset 可以应用于网站用户登陆，返回0表示未登陆过  统计指定范围值为">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-log">
-<meta property="og:url" content="http://xwkwh.github.io/2016/08/31/Hexo-log/index.html">
+<meta property="og:title" content="Redis Bitmaps">
+<meta property="og:url" content="http://xwkwh.github.io/2018/11/06/2018-11-06-Redis-Bitmaps/index.html">
 <meta property="og:site_name" content="邢武坤">
-<meta property="og:description" content="记录 随笔 知识管理，时间管理，自我管理，阅读，语音写作，思维导图">
+<meta property="og:description" content="BitmapsBitmaps 在redis中本身不是数据结构，实际上它就是字符串，但是他可以对字符串的位进行操作 bitmaps单独提供了一套命令和string的使用不太相同 命令 设置值 1setbit key offset value offset为相对偏移量，返回的值为该位原来的值  获取值 1getbit key offset 可以应用于网站用户登陆，返回0表示未登陆过  统计指定范围值为">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-01T11:46:14.905Z">
+<meta property="og:updated_time" content="2018-11-06T11:44:56.590Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo-log">
-<meta name="twitter:description" content="记录 随笔 知识管理，时间管理，自我管理，阅读，语音写作，思维导图">
+<meta name="twitter:title" content="Redis Bitmaps">
+<meta name="twitter:description" content="BitmapsBitmaps 在redis中本身不是数据结构，实际上它就是字符串，但是他可以对字符串的位进行操作 bitmaps单独提供了一套命令和string的使用不太相同 命令 设置值 1setbit key offset value offset为相对偏移量，返回的值为该位原来的值  获取值 1getbit key offset 可以应用于网站用户登陆，返回0表示未登陆过  统计指定范围值为">
 
     
     <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
@@ -86,14 +87,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/31/Hexo-log/" title="Hexo-log" itemprop="url">Hexo-log</a>
+      <a href="/2018/11/06/2018-11-06-Redis-Bitmaps/" title="Redis Bitmaps" itemprop="url">Redis Bitmaps</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
 		
   </p><p class="article-time">
-    <time datetime="2016-08-31T10:55:32.000Z" itemprop="datePublished"> Published 2016-08-31</time>
+    <time datetime="2018-11-06T11:00:00.000Z" itemprop="datePublished"> Published 2018-11-06</time>
     
   </p>
 </header>
@@ -102,15 +103,54 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmaps"><span class="toc-number">1.</span> <span class="toc-text">Bitmaps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">2.</span> <span class="toc-text">命令</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<h3 id="Bitmaps"><a href="#Bitmaps" class="headerlink" title="Bitmaps"></a>Bitmaps</h3><p>Bitmaps 在redis中本身不是数据结构，实际上它就是字符串，但是他可以对字符串的位进行操作</p>
+<p>bitmaps单独提供了一套命令和string的使用不太相同</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ol>
+<li><p>设置值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setbit key offset value</span><br></pre></td></tr></table></figure>
+<p>offset为相对偏移量，返回的值为该位原来的值</p>
+</li>
+<li><p>获取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getbit key offset</span><br></pre></td></tr></table></figure>
+<p>可以应用于网站用户登陆，返回0表示未登陆过</p>
+</li>
+<li><p>统计指定范围值为1的个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitcount key [start][end]</span><br></pre></td></tr></table></figure>
+<p>可以应用于用户访问数量 和 时长</p>
+</li>
+<li><p>bitmaps之间的运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitop op destkey key[key....]</span><br></pre></td></tr></table></figure>
+<p>bitop是一个复合操作，它可以做多个Bitmaps的and（交集）、or（并 集）、not（非）、xor（异或）操作并将结果保存在destkey中</p>
+<p>eg: 计算几天内用户任意一天访问过的数量，可以把这几天的key取and</p>
+<p><code>bitop and unique:users:and:2016-04-04_03 unique:users:2016-04-03 unique:users:2016-04-03</code></p>
+</li>
+<li><p>计算bitmaps中第一个值为targeBit的偏移量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitpos key targetBit [start] [end]</span><br></pre></td></tr></table></figure>
+<p>eg: 计算当前访问的用户最小id</p>
+<p><code>bitpos unique:users:2016-04-04 1</code></p>
+<p><code>(integer) 1</code></p>
+</li>
+</ol>
+<p>### </p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/redis/">redis</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/redis/">redis</a>
+  </div>
 
 </div>
 
@@ -118,7 +158,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xwkwh.github.io/2016/08/31/Hexo-log/" data-title="Hexo-log | 邢武坤" data-tsina="" class="share clearfix">
+	  <div data-url="http://xwkwh.github.io/2018/11/06/2018-11-06-Redis-Bitmaps/" data-title="Redis Bitmaps | 邢武坤" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -131,19 +171,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2016/09/02/转圈打印矩阵/" title="转圈打印矩阵">
-  <strong>上一篇：</strong><br>
-  <span>
-  转圈打印矩阵</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/08/31/First-blog/" title="我的第一篇博客">
+<a href="/2018/11/01/Sed Learning/" title="Sed Learning">
  <strong>下一篇：</strong><br> 
- <span>我的第一篇博客
+ <span>Sed Learning
 </span>
 </a>
 </div>
@@ -158,7 +190,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmaps"><span class="toc-number">1.</span> <span class="toc-text">Bitmaps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">2.</span> <span class="toc-text">命令</span></a></li></ol>
  
   </div>
 
