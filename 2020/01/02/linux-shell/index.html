@@ -1,0 +1,874 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Linux Shell Learning | 邢武坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="邢武坤">
+    
+
+    
+    <meta name="description" content="Base chsh change shell To Know shells installed123456789101112$ cat /etc/shells# List of acceptable shells for chpass(1).# Ftpd will not allow users to connect who are not using# one of these shells.">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Shell Learning">
+<meta property="og:url" content="http://xwkwh.github.io/2020/01/02/linux-shell/index.html">
+<meta property="og:site_name" content="邢武坤">
+<meta property="og:description" content="Base chsh change shell To Know shells installed123456789101112$ cat /etc/shells# List of acceptable shells for chpass(1).# Ftpd will not allow users to connect who are not using# one of these shells.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-02T16:42:48.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Shell Learning">
+<meta name="twitter:description" content="Base chsh change shell To Know shells installed123456789101112$ cat /etc/shells# List of acceptable shells for chpass(1).# Ftpd will not allow users to connect who are not using# one of these shells.">
+
+    
+    <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="邢武坤">邢武坤</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+						<li><a href="/categories">分类 | Categories</a></li>
+					
+						<li><a href="/tags">标签 | Tags</a></li>
+					
+						<li><a href="/timeline">时光机</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2020/01/02/linux-shell/" title="Linux Shell Learning" itemprop="url">Linux Shell Learning</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
+		
+  </p><p class="article-time">
+    <time datetime="2020-01-02T13:10:26.000Z" itemprop="datePublished"> Published 2020-01-02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Base"><span class="toc-number">1.</span> <span class="toc-text">Base</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#chsh-change-shell"><span class="toc-number">1.1.</span> <span class="toc-text">chsh change shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#To-Know-shells-installed"><span class="toc-number">1.1.1.</span> <span class="toc-text">To Know shells installed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#check-current-shell"><span class="toc-number">1.1.2.</span> <span class="toc-text">check current shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#change-shell-in-all-environment"><span class="toc-number">1.1.3.</span> <span class="toc-text">change shell in all environment</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#export-change-environment-variable"><span class="toc-number">1.2.</span> <span class="toc-text">export: change environment variable</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#export-output-all-environment-variable"><span class="toc-number">1.2.1.</span> <span class="toc-text">export output all environment variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Difference-of-env-set-export-declare"><span class="toc-number">1.2.2.</span> <span class="toc-text">Difference of env/set/export/declare</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set-environment-variable"><span class="toc-number">1.2.3.</span> <span class="toc-text">set environment variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Roles-of-export"><span class="toc-number">1.2.4.</span> <span class="toc-text">Roles of export</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#read"><span class="toc-number">1.3.</span> <span class="toc-text">read</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#listen-from-keyboard"><span class="toc-number">1.3.1.</span> <span class="toc-text">listen from keyboard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#read-but-time-limit"><span class="toc-number">1.3.2.</span> <span class="toc-text">read but time limit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#password-input"><span class="toc-number">1.3.3.</span> <span class="toc-text">password input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#read-from-file"><span class="toc-number">1.3.4.</span> <span class="toc-text">read from file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Line-break"><span class="toc-number">1.3.5.</span> <span class="toc-text">Line break</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#expr-calculation"><span class="toc-number">1.4.</span> <span class="toc-text">expr: calculation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.1.</span> <span class="toc-text">+-*/</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#operate-string"><span class="toc-number">1.4.2.</span> <span class="toc-text">operate string</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmux-multi-windows-and-session"><span class="toc-number">1.5.</span> <span class="toc-text">tmux: multi windows and session</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trouble-can-solve"><span class="toc-number">1.5.1.</span> <span class="toc-text">trouble can solve</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.5.2.</span> <span class="toc-text">Usage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alias"><span class="toc-number">1.6.</span> <span class="toc-text">alias</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-number">1.7.</span> <span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs"><span class="toc-number">1.8.</span> <span class="toc-text">xargs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pipleline"><span class="toc-number">1.8.1.</span> <span class="toc-text">pipleline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xargs-p-y-n"><span class="toc-number">1.8.2.</span> <span class="toc-text">xargs -p :y/n</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xargs-E-quit"><span class="toc-number">1.8.3.</span> <span class="toc-text">xargs -E quit</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#time"><span class="toc-number">1.9.</span> <span class="toc-text">time</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#time-a-simple-command-or-give-resource-usage"><span class="toc-number">1.9.1.</span> <span class="toc-text">time a simple command or give resource usage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sleep"><span class="toc-number">1.10.</span> <span class="toc-text">sleep</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FIle"><span class="toc-number">2.</span> <span class="toc-text">FIle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Text"><span class="toc-number">3.</span> <span class="toc-text">Text</span></a></li></ol>
+		
+		</div>
+		
+		<p><a id="org2d80cd5"></a></p>
+<h1 id="Base"><a href="#Base" class="headerlink" title="Base"></a>Base</h1><p><a id="orgf8f1226"></a></p>
+<h2 id="chsh-change-shell"><a href="#chsh-change-shell" class="headerlink" title="chsh change shell"></a>chsh change shell</h2><p><a id="org0b6ca4c"></a></p>
+<h3 id="To-Know-shells-installed"><a href="#To-Know-shells-installed" class="headerlink" title="To Know shells installed"></a>To Know shells installed</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat /etc/shells</span><br><span class="line"><span class="meta">#</span> List of acceptable shells for chpass(1).</span><br><span class="line"><span class="meta">#</span> Ftpd will not allow users to connect who are not using</span><br><span class="line"><span class="meta">#</span> one of these shells.</span><br><span class="line"></span><br><span class="line">/bin/bash</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+<p><a id="org782e898"></a></p>
+<h3 id="check-current-shell"><a href="#check-current-shell" class="headerlink" title="check current shell"></a>check current shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> echo $SHELL</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+<p><a id="org87c17c9"></a></p>
+<h3 id="change-shell-in-all-environment"><a href="#change-shell-in-all-environment" class="headerlink" title="change shell in all environment"></a>change shell in all environment</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> chsh -s /bin/zsh</span><br><span class="line">Changing shell for xwk.</span><br><span class="line">Password for xwk:</span><br><span class="line">chsh: no changes made</span><br></pre></td></tr></table></figure>
+<p><a id="org6705c7e"></a></p>
+<h2 id="export-change-environment-variable"><a href="#export-change-environment-variable" class="headerlink" title="export: change environment variable"></a>export: change environment variable</h2><p><a id="org7814e86"></a></p>
+<h3 id="export-output-all-environment-variable"><a href="#export-output-all-environment-variable" class="headerlink" title="export output all environment variable"></a>export output all environment variable</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> export</span><br><span class="line">CLICOLOR=1</span><br><span class="line">COLORFGBG='7;0'</span><br><span class="line">COLORTERM=truecolor</span><br><span class="line">COMMAND_MODE=unix2003</span><br><span class="line">GOBIN=/Users/xwk/gopath/bin</span><br><span class="line">GOPATH=/Users/xwk/gopath</span><br><span class="line">GOROOT=/usr/local/go</span><br><span class="line">HOME=/Users/xwk</span><br><span class="line">HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles</span><br><span class="line">HOMEBREW_NO_AUTO_UPDATE=1</span><br><span class="line">ITERM_PROFILE=Default</span><br><span class="line">ITERM_SESSION_ID=w0t1p0:5212F532-B525-4B5D-BB6E-238806196C29</span><br><span class="line">LANG=zh_CN.UTF-8</span><br><span class="line">LC_ALL=zh_CN.UTF-8</span><br><span class="line">LC_TERMINAL=iTerm2</span><br><span class="line">LC_TERMINAL_VERSION=3.3.7beta1</span><br><span class="line">LESS=-R</span><br><span class="line">LOGNAME=xwk</span><br><span class="line">LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD</span><br><span class="line">LaunchInstanceID=3E754314-9261-4388-9A0E-2FC388411C15</span><br><span class="line">OLDPWD=/Users/xwk</span><br><span class="line">PAGER=less</span><br><span class="line">PATH='/Applications/MacVim.app/Contents/bin:/bin:/usr/bin:/usr/local/bin:/Applications/MacVim.app/Contents/bin:/bin:/usr/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/Users/xwk/gopath/bin:/Users/xwk/.fzf/bin:/Users/xwk/gopath/bin'</span><br><span class="line">PWD=/etc</span><br><span class="line">SECURITYSESSIONID=18778</span><br><span class="line">SHELL=/bin/zsh</span><br><span class="line">SHLVL=2</span><br></pre></td></tr></table></figure>
+<p><a id="orgc2ef8c0"></a></p>
+<h3 id="Difference-of-env-set-export-declare"><a href="#Difference-of-env-set-export-declare" class="headerlink" title="Difference of env/set/export/declare"></a>Difference of env/set/export/declare</h3><ol>
+<li><p>shell variabel</p>
+<ul>
+<li>envionment variable</li>
+<li>custom variable</li>
+</ul>
+</li>
+<li><p>Difference</p>
+<ul>
+<li>env: current user environment variable</li>
+<li>export: same as env, but output sort by name</li>
+<li>set: all variable in this shell</li>
+<li>declare: same as set, but output sort by name</li>
+</ul>
+</li>
+<li><p>Conclusion</p>
+<ul>
+<li>env/export: show environment variable</li>
+<li>set/decare: show all variable</li>
+</ul>
+</li>
+</ol>
+<p><a id="orge5bd0e9"></a></p>
+<h3 id="set-environment-variable"><a href="#set-environment-variable" class="headerlink" title="set environment variable"></a>set environment variable</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/bin</span><br></pre></td></tr></table></figure>
+<p><a id="org14e1c49"></a></p>
+<h3 id="Roles-of-export"><a href="#Roles-of-export" class="headerlink" title="Roles of export"></a>Roles of export</h3><p>set environment variable</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> guopu=123</span><br><span class="line"><span class="meta">$</span> echo $guopu</span><br><span class="line">123</span><br><span class="line"><span class="meta">$</span> xwk=456</span><br><span class="line"><span class="meta">$</span> echo $xwk</span><br><span class="line">456</span><br><span class="line"><span class="meta">$</span> export guopu</span><br><span class="line"><span class="meta">$</span> dash</span><br><span class="line"><span class="meta">$</span> echo $guopu</span><br><span class="line">123</span><br><span class="line"><span class="meta">$</span> echo $xwk</span><br></pre></td></tr></table></figure>
+<p><a id="org383f21b"></a></p>
+<h2 id="read"><a href="#read" class="headerlink" title="read"></a>read</h2><p><a id="orga409d2d"></a></p>
+<h3 id="listen-from-keyboard"><a href="#listen-from-keyboard" class="headerlink" title="listen from keyboard"></a>listen from keyboard</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">read -p "Please input your name and age:" name age</span><br><span class="line">echo "Welcome !!! $name is $age"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<p><a id="orge179e6b"></a></p>
+<h3 id="read-but-time-limit"><a href="#read-but-time-limit" class="headerlink" title="read but time limit"></a>read but time limit</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">if read -t 3 -p "Please input your name and age within 3s:" name age</span><br><span class="line">then</span><br><span class="line">    echo "Welcome !!! $name is $age"</span><br><span class="line">else</span><br><span class="line">    echo "Sorry too slow!"</span><br><span class="line">fi</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<p><a id="orga8fa29f"></a></p>
+<h3 id="password-input"><a href="#password-input" class="headerlink" title="password input"></a>password input</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read  -s -p "Plese input passwd: " passwd</span><br><span class="line">echo "you input: $passwd"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<p><a id="org01314bb"></a></p>
+<h3 id="read-from-file"><a href="#read-from-file" class="headerlink" title="read from file"></a>read from file</h3><ul>
+<li>&amp;- close standard output eg: file fd</li>
+</ul>
+<ol>
+<li><p>Solution 1: read -u</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span> assign the file desciptor to file for input fd # 3 is Input file</span><br><span class="line">exec 3&lt; test.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> read  the file using fd # 3</span><br><span class="line">count=0</span><br><span class="line">while read -u 3 var</span><br><span class="line">do</span><br><span class="line">    let count=$count+1</span><br><span class="line">    echo "LIne $count: $var"</span><br><span class="line">done</span><br><span class="line">echo "finished"</span><br><span class="line">echo "LIne num is $count"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> close fd</span><br><span class="line">exec 3&lt;&amp;-</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Solution 2: pipeline |</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">count=0</span><br><span class="line">cat test.sh | while read line</span><br><span class="line">do</span><br><span class="line">    let count=$count+1</span><br><span class="line">    echo "Line $count: $line"</span><br><span class="line">done</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Solution 3: redirect &lt;</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">count=0</span><br><span class="line">while read line</span><br><span class="line">do</span><br><span class="line">    let count=$count+1</span><br><span class="line">    echo "Line $count: $line"</span><br><span class="line">done &lt; test.sh</span><br><span class="line">echo "count: $count"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a id="orgb3ffd96"></a></p>
+<h3 id="Line-break"><a href="#Line-break" class="headerlink" title="Line break"></a>Line break</h3><p>Do not let backslash (\) act as an escape character read -r variable</p>
+<p><a id="org1a4d11f"></a></p>
+<h2 id="expr-calculation"><a href="#expr-calculation" class="headerlink" title="expr: calculation"></a>expr: calculation</h2><p><a id="org2a6f738"></a></p>
+<h3 id=""><a href="#" class="headerlink" title="+-*/"></a>+-*/</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">expr 10 + 10</span><br><span class="line">expr 20 - 10</span><br><span class="line">expr 30 / 10</span><br><span class="line"><span class="meta">#</span> * is the special character</span><br><span class="line">expr 10 \* 3 </span><br><span class="line">expr \( 3 + 3 \) \* 3 + 10</span><br></pre></td></tr></table></figure>
+<p><a id="org8102cf9"></a></p>
+<h3 id="operate-string"><a href="#operate-string" class="headerlink" title="operate string"></a>operate string</h3><table>
+<thead>
+<tr>
+<th>运算</th>
+<th>表达式</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>match</td>
+<td>match STRING REGEXP</td>
+<td>STRING中匹配REGEXP的字符串返回匹配的长度</td>
+</tr>
+<tr>
+<td>substr</td>
+<td>substr STRING POS LEN</td>
+<td>从POS位置截取LEN长度字符串</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index STRING SUBSTR</td>
+<td>查找子字符串的起始位置</td>
+</tr>
+<tr>
+<td>length</td>
+<td>length STRING</td>
+<td>字符串的长度</td>
+</tr>
+</tbody>
+</table>
+<p><a id="org7009b46"></a></p>
+<h2 id="tmux-multi-windows-and-session"><a href="#tmux-multi-windows-and-session" class="headerlink" title="tmux: multi windows and session"></a>tmux: multi windows and session</h2><p>Terminal MultipleXer</p>
+<p><a id="org5d56712"></a></p>
+<h3 id="trouble-can-solve"><a href="#trouble-can-solve" class="headerlink" title="trouble can solve"></a>trouble can solve</h3><ul>
+<li>big data transporting while disconnected</li>
+<li>compiling and runing but over</li>
+<li>multi windows</li>
+</ul>
+<p><a id="org4a30031"></a></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ol>
+<li><p>run</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s session_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>create again</p>
+<ul>
+<li>Ctr-b</li>
+<li>c</li>
+</ul>
+</li>
+<li><p>switch windows</p>
+<ul>
+<li>C-b</li>
+<li>number (the window)</li>
+</ul>
+</li>
+<li><p>quit</p>
+<ul>
+<li>C-b d</li>
+</ul>
+</li>
+<li><p>back</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tmux ls</span><br><span class="line">0: 1 windows (created Sat Feb 29 23:30:39 2020)</span><br><span class="line">hello: 4 windows (created Sat Feb 29 23:44:30 2020)</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> tmux a -t hello</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>other</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>operate</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pane</td>
+<td>%</td>
+<td>split horizon</td>
+</tr>
+<tr>
+<td></td>
+<td>“</td>
+<td>split vertical</td>
+</tr>
+<tr>
+<td></td>
+<td>x</td>
+<td>close current</td>
+</tr>
+<tr>
+<td></td>
+<td>{</td>
+<td>current forward</td>
+</tr>
+<tr>
+<td></td>
+<td>}</td>
+<td>current backward</td>
+</tr>
+<tr>
+<td></td>
+<td>;</td>
+<td>switch pre pane</td>
+</tr>
+<tr>
+<td></td>
+<td>o</td>
+<td>next pane(also up/down/left/right)</td>
+</tr>
+<tr>
+<td></td>
+<td>space</td>
+<td>switch layout</td>
+</tr>
+<tr>
+<td></td>
+<td>z</td>
+<td>max current;again z recover</td>
+</tr>
+<tr>
+<td></td>
+<td>q</td>
+<td>show all pane number</td>
+</tr>
+<tr>
+<td>window</td>
+<td>c</td>
+<td>new window</td>
+</tr>
+<tr>
+<td></td>
+<td>p</td>
+<td>pre window</td>
+</tr>
+<tr>
+<td></td>
+<td>n</td>
+<td>nex window</td>
+</tr>
+<tr>
+<td></td>
+<td>w</td>
+<td>window list</td>
+</tr>
+<tr>
+<td></td>
+<td>&amp;</td>
+<td>close current</td>
+</tr>
+<tr>
+<td></td>
+<td>,</td>
+<td>rename window</td>
+</tr>
+<tr>
+<td></td>
+<td>number</td>
+<td>switch window</td>
+</tr>
+<tr>
+<td></td>
+<td>f</td>
+<td>search window</td>
+</tr>
+</tbody>
+</table>
+<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s foo # 新建名称为 foo 的会话</span><br><span class="line">tmux ls # 列出所有 tmux 会话</span><br><span class="line">tmux a # 恢复至上一次的会话</span><br><span class="line">tmux a -t foo # 恢复名称为 foo 的会话，会话默认名称为数字</span><br><span class="line">tmux kill-session -t foo # 删除名称为 foo 的会话</span><br><span class="line">tmux kill-server # 删除所有的会话</span><br></pre></td></tr></table></figure>
+</code></pre><p><a id="org7606d0f"></a></p>
+<h2 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> set alias</span><br><span class="line">alias name=value # = before and after don't have space</span><br><span class="line"><span class="meta">#</span> show all alias</span><br><span class="line">alias</span><br><span class="line">alias gomodon</span><br><span class="line"><span class="meta">#</span> delete alias</span><br><span class="line">unalias vi</span><br><span class="line">unalias -a # delete all</span><br></pre></td></tr></table></figure>
+<p><a id="orgd89e14d"></a></p>
+<h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><ul>
+<li>show time export HISTTIMEFORMAT=’%F %T’</li>
+<li>repeat action C-p</li>
+<li>clear history -c</li>
+</ul>
+<p><a id="org24369c4"></a></p>
+<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p>execute arguments</p>
+<p><a id="org8205424"></a></p>
+<h3 id="pipleline"><a href="#pipleline" class="headerlink" title="pipleline"></a>pipleline</h3><p>pipleline can use pre input as after input but cann’t use it as arguments eg:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ echo test.log | cat</span><br><span class="line">test.log</span><br><span class="line">➜  ~ echo test.log | xargs cat</span><br><span class="line">hello luojilab</span><br></pre></td></tr></table></figure>
+<p>xargs default see ‘enter tab space’ as space use ‘xargs -0 ‘can change it as NULL</p>
+<p><a id="org1657276"></a></p>
+<h3 id="xargs-p-y-n"><a href="#xargs-p-y-n" class="headerlink" title="xargs -p :y/n"></a>xargs -p :y/n</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ echo test.log | xargs -p cat</span><br><span class="line">cat test.log ?...y</span><br><span class="line">hello luojilab</span><br></pre></td></tr></table></figure>
+<p><a id="org113d414"></a></p>
+<h3 id="xargs-E-quit"><a href="#xargs-E-quit" class="headerlink" title="xargs -E quit"></a>xargs -E quit</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ cat test.log</span><br><span class="line">hello he hhh yy</span><br><span class="line">➜  ~ cat test.log| xargs -E "hhh" echo</span><br><span class="line">hello he</span><br></pre></td></tr></table></figure>
+<p><a id="orgb2ef30d"></a></p>
+<h2 id="time"><a href="#time" class="headerlink" title="time"></a>time</h2><p><a id="orgefa19d4"></a></p>
+<h3 id="time-a-simple-command-or-give-resource-usage"><a href="#time-a-simple-command-or-give-resource-usage" class="headerlink" title="time a simple command or give resource usage"></a>time a simple command or give resource usage</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@BJ-DEV-GO ledgers]# time grep mockUids ledgers.log</span><br><span class="line"></span><br><span class="line">real	0m0.164s</span><br><span class="line">user	0m0.099s</span><br><span class="line">sys	0m0.046s</span><br></pre></td></tr></table></figure>
+<p><a id="orgd97a4ee"></a></p>
+<h2 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> date;sleep 30s;date</span><br><span class="line">2020年 3月 1日 星期日 16时16分41秒 CST</span><br><span class="line">2020年 3月 1日 星期日 16时17分11秒 CST</span><br></pre></td></tr></table></figure>
+<p><a id="orgc9fd929"></a></p>
+<h1 id="FIle"><a href="#FIle" class="headerlink" title="FIle"></a>FIle</h1><p><a id="org3c69f43"></a></p>
+<h1 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h1>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xwkwh.github.io/2020/01/02/linux-shell/" data-title="Linux Shell Learning | 邢武坤" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/06/2018-11-06-Redis-Bitmaps/" title="Redis Bitmaps">
+ <strong>下一篇：</strong><br> 
+ <span>Redis Bitmaps
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Base"><span class="toc-number">1.</span> <span class="toc-text">Base</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#chsh-change-shell"><span class="toc-number">1.1.</span> <span class="toc-text">chsh change shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#To-Know-shells-installed"><span class="toc-number">1.1.1.</span> <span class="toc-text">To Know shells installed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#check-current-shell"><span class="toc-number">1.1.2.</span> <span class="toc-text">check current shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#change-shell-in-all-environment"><span class="toc-number">1.1.3.</span> <span class="toc-text">change shell in all environment</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#export-change-environment-variable"><span class="toc-number">1.2.</span> <span class="toc-text">export: change environment variable</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#export-output-all-environment-variable"><span class="toc-number">1.2.1.</span> <span class="toc-text">export output all environment variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Difference-of-env-set-export-declare"><span class="toc-number">1.2.2.</span> <span class="toc-text">Difference of env/set/export/declare</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set-environment-variable"><span class="toc-number">1.2.3.</span> <span class="toc-text">set environment variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Roles-of-export"><span class="toc-number">1.2.4.</span> <span class="toc-text">Roles of export</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#read"><span class="toc-number">1.3.</span> <span class="toc-text">read</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#listen-from-keyboard"><span class="toc-number">1.3.1.</span> <span class="toc-text">listen from keyboard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#read-but-time-limit"><span class="toc-number">1.3.2.</span> <span class="toc-text">read but time limit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#password-input"><span class="toc-number">1.3.3.</span> <span class="toc-text">password input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#read-from-file"><span class="toc-number">1.3.4.</span> <span class="toc-text">read from file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Line-break"><span class="toc-number">1.3.5.</span> <span class="toc-text">Line break</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#expr-calculation"><span class="toc-number">1.4.</span> <span class="toc-text">expr: calculation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.1.</span> <span class="toc-text">+-*/</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#operate-string"><span class="toc-number">1.4.2.</span> <span class="toc-text">operate string</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmux-multi-windows-and-session"><span class="toc-number">1.5.</span> <span class="toc-text">tmux: multi windows and session</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trouble-can-solve"><span class="toc-number">1.5.1.</span> <span class="toc-text">trouble can solve</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.5.2.</span> <span class="toc-text">Usage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alias"><span class="toc-number">1.6.</span> <span class="toc-text">alias</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-number">1.7.</span> <span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs"><span class="toc-number">1.8.</span> <span class="toc-text">xargs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pipleline"><span class="toc-number">1.8.1.</span> <span class="toc-text">pipleline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xargs-p-y-n"><span class="toc-number">1.8.2.</span> <span class="toc-text">xargs -p :y/n</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xargs-E-quit"><span class="toc-number">1.8.3.</span> <span class="toc-text">xargs -E quit</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#time"><span class="toc-number">1.9.</span> <span class="toc-text">time</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#time-a-simple-command-or-give-resource-usage"><span class="toc-number">1.9.1.</span> <span class="toc-text">time a simple command or give resource usage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sleep"><span class="toc-number">1.10.</span> <span class="toc-text">sleep</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FIle"><span class="toc-number">2.</span> <span class="toc-text">FIle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Text"><span class="toc-number">3.</span> <span class="toc-text">Text</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/mac/" title="mac">mac<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/redis/" title="redis">redis<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/vim/" title="vim">vim<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/常用命令/" title="常用命令">常用命令<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/排序/" title="排序">排序<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法数据结构/" title="算法数据结构">算法数据结构<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/面试/" title="面试">面试<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leetcode/" title="Leetcode">Leetcode<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Golang/" title="Golang">Golang<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机/" title="计算机">计算机<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/goroutine/" title="goroutine">goroutine<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vim/" title="vim">vim<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Leecode/" title="Leecode">Leecode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/矩阵/" title="矩阵">矩阵<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/easy/" title="easy">easy<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/插入/" title="插入">插入<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://toutiao.io/" target="_blank" title="开发者头条">开发者头条</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/peace1213" target="_blank" title="peace in csdn">peace in csdn</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/onepeace/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 菜鸟程序猿成长之路 <br>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/xwkwh" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:1669559065@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		
+		<a href="/about" target="_blank" title="邢武坤">邢武坤</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255712369'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1255712369' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
