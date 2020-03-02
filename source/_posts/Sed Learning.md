@@ -1,8 +1,8 @@
 ---
 title: Sed Learning
 date: 2018-11-01 19:12:35
-categories: linux
-tags: linux
+categories: Linux
+tags: Linux
 ---
 
 
