@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   
     <title>Cach2go源码学习 | 邢武坤</title>
@@ -43,7 +43,7 @@
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"></a>
+				<a href="/"><img src="/img/logo.png" alt="邢武坤" title="邢武坤"/></a>
 			</div>
 			
 			<div id="textlogo">
@@ -72,16 +72,16 @@
  					
 						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
 							<label>Search</label>
-						<input name="s" type="hidden" value="16217304412639600000"><input type="text" name="q" size="30" placeholder="Search"><br>
+						<input name="s" type="hidden" value= 16217304412639600000 ><input type="text" name="q" size="30" placeholder="Search"><br>
 						</form>
 					
 					</li>
 				</ul>
-			</ul></nav>			
+			</nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope="" itemprop="blogPost">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -93,7 +93,7 @@
        
 		<a href="/about" title="邢武坤" target="_blank" itemprop="author">邢武坤</a>
 		
-  </p><p class="article-time">
+  <p class="article-time">
     <time datetime="2018-06-24T08:10:26.000Z" itemprop="datePublished"> Published 2018-06-24</time>
     
   </p>
@@ -103,7 +103,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cach2go源码学习"><span class="toc-number">1.</span> <span class="toc-text">Cach2go源码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheTable"><span class="toc-number">1.0.2.</span> <span class="toc-text">CacheTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheItem"><span class="toc-number">1.0.3.</span> <span class="toc-text">CacheItem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Errors"><span class="toc-number">1.0.4.</span> <span class="toc-text">Errors</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cach2go源码学习"><span class="toc-number">1.</span> <span class="toc-text">Cach2go源码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheTable"><span class="toc-number">1.0.2.</span> <span class="toc-text">CacheTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheItem"><span class="toc-number">1.0.3.</span> <span class="toc-text">CacheItem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Errors"><span class="toc-number">1.0.4.</span> <span class="toc-text">Errors</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -153,9 +153,9 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
+ <div class="prev" >
  <a href="/2018/10/29/Mac 工作设置/" title="Mac Setting">
-  <strong>上一篇：</strong><br>
+  <strong>上一篇：</strong><br/>
   <span>
   Mac Setting</span>
 </a>
@@ -163,8 +163,8 @@
 
 
 <div class="next">
-<a href="/2018/06/21/Golang Goroutine源码解析/" title="Golang Goroutine源码解析 -1">
- <strong>下一篇：</strong><br> 
+<a href="/2018/06/21/Golang Goroutine源码解析/"  title="Golang Goroutine源码解析 -1">
+ <strong>下一篇：</strong><br/> 
  <span>Golang Goroutine源码解析 -1
 </span>
 </a>
@@ -180,7 +180,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cach2go源码学习"><span class="toc-number">1.</span> <span class="toc-text">Cach2go源码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheTable"><span class="toc-number">1.0.2.</span> <span class="toc-text">CacheTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheItem"><span class="toc-number">1.0.3.</span> <span class="toc-text">CacheItem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Errors"><span class="toc-number">1.0.4.</span> <span class="toc-text">Errors</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cach2go源码学习"><span class="toc-number">1.</span> <span class="toc-text">Cach2go源码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache"><span class="toc-number">1.0.1.</span> <span class="toc-text">Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheTable"><span class="toc-number">1.0.2.</span> <span class="toc-text">CacheTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheItem"><span class="toc-number">1.0.3.</span> <span class="toc-text">CacheItem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Errors"><span class="toc-number">1.0.4.</span> <span class="toc-text">Errors</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -192,7 +192,7 @@
 <div class="github-card">
 <p class="asidetitle">Github Card</p>
 <div class="github-card" data-github="xwkwh" data-width="220" data-height="119" data-theme="medium">
-<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
 </div>
   </div>
 
@@ -285,11 +285,11 @@
 			
 		
 			
-				<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/第一篇/" title="第一篇">第一篇<sup>1</sup></a></li>
+				<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
 			
 		
 			
@@ -376,14 +376,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">Weibo</p>
-    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer">
+    <footer><div id="footer" >
 	
 	<div class="line">
 		<span></span>
@@ -392,11 +392,11 @@
 	
 	
 	<section class="info">
-		<p> 菜鸟程序猿成长之路 <br>
+		<p> 菜鸟程序猿成长之路 <br/>
 			This is my blog,believe it or not.</p>
 	</section>
 	 
-	<div class="social-font">
+	<div class="social-font" class="clearfix">
 		
 		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -608,7 +608,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
