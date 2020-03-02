@@ -110,15 +110,21 @@
 		<h3 id="GO计时器"><a href="#GO计时器" class="headerlink" title="GO计时器"></a>GO计时器</h3><h3 id="Golang中超时处理-（select）"><a href="#Golang中超时处理-（select）" class="headerlink" title="Golang中超时处理 （select）"></a>Golang中超时处理 （select）</h3><h3 id="协程交替打印1-20"><a href="#协程交替打印1-20" class="headerlink" title="协程交替打印1-20"></a>协程交替打印1-20</h3><h3 id="协程生产者消费者"><a href="#协程生产者消费者" class="headerlink" title="协程生产者消费者"></a>协程生产者消费者</h3><ul>
 <li><p>无缓冲区</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">produce</span><span class="params">(ch <span class="keyword">chan</span>&lt;- <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;  </span><br><span class="line">        ch &lt;- i  </span><br><span class="line">        fmt.Println(<span class="string">"Send:"</span>, i)  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">consumer</span><span class="params">(ch &lt;-<span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;  </span><br><span class="line">        v := &lt;-ch  </span><br><span class="line">        fmt.Println(<span class="string">"Receive:"</span>, v)  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 因为channel没有缓冲区，所以当生产者给channel赋值后，  </span></span><br><span class="line"><span class="comment">// 生产者线程会阻塞，直到消费者线程将数据从channel中取出  </span></span><br><span class="line"><span class="comment">// 消费者第一次将数据取出后，进行下一次循环时，消费者的线程  </span></span><br><span class="line"><span class="comment">// 也会阻塞，因为生产者还没有将数据存入，这时程序会去执行  </span></span><br><span class="line"><span class="comment">// 生产者的线程。程序就这样在消费者和生产者两个线程间不断切换，直到循环结束。  </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)  </span><br><span class="line">    <span class="keyword">go</span> produce(ch)  </span><br><span class="line">    <span class="keyword">go</span> consumer(ch)  </span><br><span class="line">    time.Sleep(<span class="number">1</span> * time.Second)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>有缓存区</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">produce</span><span class="params">(ch <span class="keyword">chan</span>&lt;- <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;  </span><br><span class="line">        ch &lt;- i  </span><br><span class="line">        fmt.Println(<span class="string">"Send:"</span>, i)  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">consumer</span><span class="params">(ch &lt;-<span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;  </span><br><span class="line">        v := &lt;-ch  </span><br><span class="line">        fmt.Println(<span class="string">"Receive:"</span>, v)  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">10</span>)  </span><br><span class="line">    <span class="keyword">go</span> produce(ch)  </span><br><span class="line">    <span class="keyword">go</span> consumer(ch)  </span><br><span class="line">    time.Sleep(<span class="number">1</span> * time.Second)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 <h3 id="go变量默认"><a href="#go变量默认" class="headerlink" title="go变量默认"></a>go变量默认</h3><h3 id="go-slice实现"><a href="#go-slice实现" class="headerlink" title="go slice实现"></a>go slice实现</h3><p>​    slice的数据结构定义如下</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;  </span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="keyword">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="Go单例模式"><a href="#Go单例模式" class="headerlink" title="Go单例模式"></a>Go单例模式</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Singleton 是单例模式类</span></span><br><span class="line"><span class="keyword">type</span> Singleton <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> singleton *Singleton</span><br><span class="line"><span class="keyword">var</span> once sync.Once</span><br><span class="line"></span><br><span class="line"><span class="comment">//GetInstance 用于获取单例模式对象</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetInstance</span><span class="params">()</span> *<span class="title">Singleton</span></span> &#123;</span><br><span class="line">	<span class="comment">//Once have a method  Do(f func())</span></span><br><span class="line">	<span class="comment">//Do judge by done's value  whether it should perform the f method</span></span><br><span class="line">	once.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		singleton = &amp;Singleton&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> singleton</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -298,11 +304,11 @@
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -330,11 +336,11 @@
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

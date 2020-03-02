@@ -110,11 +110,14 @@
 		<h2 id="Leetcode-28-Implement-strStr"><a href="#Leetcode-28-Implement-strStr" class="headerlink" title="Leetcode 28 Implement strStr()"></a>Leetcode 28 Implement strStr()</h2><p>strStr 就是返回在字符串中出现目标字符串的第一个index</p>
 <p>eg:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: haystack = &quot;hello&quot;, needle = &quot;ll&quot;</span><br><span class="line">Output: 2</span><br><span class="line">Input: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;</span><br><span class="line">Output: -1</span><br></pre></td></tr></table></figure>
+
 <p>遍历俩个字符串，随着haystack的遍历，每一次都循环比较needle是否相等，若比较到needle的长度则返回；若中途有不匹配的，直接跳出循环</p>
 <p>Go solution1:  易于理解，在遍历前进行特殊情况的判断</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   hlen := <span class="built_in">len</span>(haystack)</span><br><span class="line">nlen := <span class="built_in">len</span>(needle)</span><br><span class="line"><span class="keyword">if</span> nlen == <span class="number">0</span>  &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> hlen &gt;= nlen &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt;=hlen-nlen; i++ &#123;</span><br><span class="line">		j := <span class="number">0</span></span><br><span class="line">		<span class="keyword">for</span> j &lt; nlen &#123;</span><br><span class="line">			<span class="keyword">if</span> haystack[i+j] != needle[j] &#123;</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			j++</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> j == nlen &#123;</span><br><span class="line">			<span class="keyword">return</span> i</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
 <p>Go solution 2: 改进</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span>; ;i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j:=<span class="number">0</span>; ;j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> j == <span class="built_in">len</span>(needle) &#123;</span><br><span class="line">				<span class="keyword">return</span> i</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> i+j == <span class="built_in">len</span>(haystack) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> haystack[i+j] != needle[j] &#123;</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -294,11 +297,11 @@
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -326,11 +329,11 @@
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

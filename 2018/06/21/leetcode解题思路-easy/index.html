@@ -131,6 +131,7 @@
 <li><p>226 Invert Binary Tree ：</p>
 <p> 非递归：和层次遍历类似，依次交换左右孩子</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">q.push(root);</span><br><span class="line"><span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">    TreeNode *node = q.front(); q.pop();</span><br><span class="line">    TreeNode *tmp = node-&gt;left;</span><br><span class="line">    node-&gt;left = node-&gt;right;</span><br><span class="line">    node-&gt;right = tmp;</span><br><span class="line">    <span class="keyword">if</span> (node-&gt;left) q.push(node-&gt;left);</span><br><span class="line">    <span class="keyword">if</span> (node-&gt;right) q.push(node-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p> 递归：交换根节点左右孩子，递归左右孩子反转</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TreeNode *tmp = root-&gt;left;</span><br><span class="line">root-&gt;left = invertTree(root-&gt;right);</span><br><span class="line">root-&gt;right = invertTree(tmp);</span><br><span class="line"><span class="keyword">return</span> root;</span><br></pre></td></tr></table></figure>
 </li>
@@ -143,6 +144,7 @@
 <li><p>100 Same Tree：</p>
 <p> 递归：DFS递归，</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode *p, TreeNode *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!p &amp;&amp; !q) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ((p &amp;&amp; !q) || (!p &amp;&amp; q) || (p-&gt;val != q-&gt;val)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p> 非递归：以同一种遍历同时遍历树，比较节点</p>
 </li>
 <li><p>242 Valid Anagram ：数组 、map、hash表</p>
@@ -186,12 +188,14 @@
 <li><p><strong>24 Swap Nodes in Pairs</strong> :</p>
 <p> 递归：</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode *t = head-&gt;next;</span><br><span class="line">    head-&gt;next = swapPairs(head-&gt;next-&gt;next);</span><br><span class="line">    t-&gt;next = head;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p> 非递归：</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">    ListNode *dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>), *pre = dummy;</span><br><span class="line">    dummy-&gt;next = head;</span><br><span class="line">    <span class="keyword">while</span> (pre-&gt;next &amp;&amp; pre-&gt;next-&gt;next) &#123;</span><br><span class="line">        ListNode *t = pre-&gt;next-&gt;next;</span><br><span class="line">        pre-&gt;next-&gt;next = t-&gt;next;</span><br><span class="line">        t-&gt;next = pre-&gt;next;</span><br><span class="line">        pre-&gt;next = t;</span><br><span class="line">        pre = t-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dummy-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>110 Balanced Binary Tree   </p>
 <p> <strong>思路：</strong>判断一棵树是否是平衡二叉树，即对于树中的任一节点，其左子树和右子树的高度差小于等于1才行。所以这里需要用到一个求树的高度的函数，如下 </p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode* root)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> root?max(depth(root-&gt;left),depth(root-&gt;right))+<span class="number">1</span>:<span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p> 然后判断是否时平衡树</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> root ? <span class="built_in">abs</span>(depth(root-&gt;left)-depth(root-&gt;right)) &lt;=<span class="number">1</span>			                                 &amp;&amp; isBalanced(root&gt;left) &amp;&amp; isBalanced(root-&gt;right) : <span class="number">1</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -281,9 +285,9 @@
 
 
 <div class="next">
-<a href="/2018/06/21/面试碎片/"  title="面试碎片">
+<a href="/2018/06/21/进程间通信 (Inter Process Communication)/"  title="进程间通信 (IPC)">
  <strong>下一篇：</strong><br/> 
- <span>面试碎片
+ <span>进程间通信 (IPC)
 </span>
 </a>
 </div>
@@ -415,11 +419,11 @@
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -447,11 +451,11 @@
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

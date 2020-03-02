@@ -124,16 +124,14 @@
         }
     }
     printSort(a);
-}
-</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>堆 一般指<strong>二叉堆</strong>，(由于其它几种堆（二项式堆，斐波纳契堆等）用的较少，一般将二叉堆就简称为<br>堆), 二叉堆是完全二叉树或近似完全二叉树</p>
+}</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>堆 一般指<strong>二叉堆</strong>，(由于其它几种堆（二项式堆，斐波纳契堆等）用的较少，一般将二叉堆就简称为<br>堆), 二叉堆是完全二叉树或近似完全二叉树</p>
 <p>特性：</p>
 <ul>
 <li>父节点 总是 大于或等于（小于或等于） 任何一个子节点</li>
 <li>每个节点的左右子树都是一个二叉堆（大根堆 /小根堆）</li>
 </ul>
 <p>存储：一般用数组存储，i节点的父节点的下标为 （i-1）/2</p>
-<pre><code>它的左右子节点为 2*i+1 , 2*i+2
-</code></pre><p>操作：<br>建堆 刚开始的数组,对应的树不是堆，需要将其堆化，依次将父节点的值与子节点中最大（小）的值比较，交换<br>插入 插入到堆末，这时堆已经乱了次序，需要再次更新 堆化<br>删除 删除节点总是发生在根节点 a[0]， 删除后将最后一个节点交换上来，再次更新，堆化</p>
+<pre><code>它的左右子节点为 2*i+1 , 2*i+2</code></pre><p>操作：<br>建堆 刚开始的数组,对应的树不是堆，需要将其堆化，依次将父节点的值与子节点中最大（小）的值比较，交换<br>插入 插入到堆末，这时堆已经乱了次序，需要再次更新 堆化<br>删除 删除节点总是发生在根节点 a[0]， 删除后将最后一个节点交换上来，再次更新，堆化</p>
 <h4 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h4><pre><code>public static void headSort(int[] a) {
     for (int i = 0; i &lt; a.length; i++) {
         createMaxHeap(a, a.length - 1 - i); //堆化 大根堆 
@@ -166,8 +164,7 @@ private static void createMaxHeap(int[] a, int lastIndex) {
             }
         }
     }
-}
-</code></pre>  
+}</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -346,11 +343,11 @@ private static void createMaxHeap(int[] a, int lastIndex) {
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -378,11 +375,11 @@ private static void createMaxHeap(int[] a, int lastIndex) {
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

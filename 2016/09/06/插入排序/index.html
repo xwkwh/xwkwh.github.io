@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1 将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。 i++并重复第二步直到">
+    <meta name="description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1  将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。  i++并重复第二步">
 <meta name="keywords" content="排序,插入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="插入排序">
 <meta property="og:url" content="http://xwkwh.github.io/2016/09/06/插入排序/index.html">
 <meta property="og:site_name" content="邢武坤">
-<meta property="og:description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1 将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。 i++并重复第二步直到">
+<meta property="og:description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1  将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。  i++并重复第二步">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-03-02T17:20:26.652Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序">
-<meta name="twitter:description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1 将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。 i++并重复第二步直到">
+<meta name="twitter:description" content="插入排序分为 简单插入排序 和 希尔排序 简单插入排序 (三种实现)基本思想：每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成为止。设数组为 a[0…n-1]。  初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1  将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。  i++并重复第二步">
 
     
     <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
@@ -110,8 +110,10 @@
 		<p>插入排序分为 简单插入排序 和 希尔排序</p>
 <h2 id="简单插入排序-三种实现"><a href="#简单插入排序-三种实现" class="headerlink" title="简单插入排序 (三种实现)"></a>简单插入排序 (三种实现)</h2><p><strong>基本思想：</strong><br>每次将一个待排序的记录，按其关键字大小插入到 前面已经排好序的子序列中 的适当位置，直到全部记录插入完成<br>为止。<br>设数组为 a[0…n-1]。</p>
 <ol>
-<li>初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1</li>
-<li>将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。</li>
+<li><p>初始时，a[0]自成 1 个有序区，无序区为 a[1..n-1]。令 i=1</p>
+</li>
+<li><p>将 a[i]并入当前的有序区 a[0…i-1]中形成 a[0…i]的有序区间。</p>
+</li>
 <li><p>i++并重复第二步直到 i==n-1。排序完成。</p>
 <p><em>按定义来比较麻烦,代码多</em>  </p>
 <p> public static void insertSort1(int[] data) {</p>
@@ -132,8 +134,7 @@ for (i = 1; i &lt; data.length; i++) {
         data[j+1] = temp;
     }
 }
-printSort(data);//封装好的一个函数用来打印数组
-</code></pre><p> }</p>
+printSort(data);//封装好的一个函数用来打印数组</code></pre><p> }</p>
 </li>
 </ol>
 <p><em>将后移和搜索放在一起</em></p>
@@ -149,8 +150,7 @@ printSort(data);//封装好的一个函数用来打印数组
         }
     }
     printSort(data);
-}
-</code></pre><p><em>用数据交换代替位置后移</em></p>
+}</code></pre><p><em>用数据交换代替位置后移</em></p>
 <pre><code>public static void insertSort3(int[] data){
     int i,j;
     for(i=1;i&lt;data.length;i++){
@@ -159,8 +159,7 @@ printSort(data);//封装好的一个函数用来打印数组
         }
     }
     printSort(data);
-}
-</code></pre><h2 id="希尔排序（俩种实现）"><a href="#希尔排序（俩种实现）" class="headerlink" title="希尔排序（俩种实现）"></a>希尔排序（俩种实现）</h2><p>希尔排序的实质就是分组插入排序，该方法又称缩小增量排序，因 DL．Shell于 1959 年提出而得名。</p>
+}</code></pre><h2 id="希尔排序（俩种实现）"><a href="#希尔排序（俩种实现）" class="headerlink" title="希尔排序（俩种实现）"></a>希尔排序（俩种实现）</h2><p>希尔排序的实质就是分组插入排序，该方法又称缩小增量排序，因 DL．Shell于 1959 年提出而得名。</p>
 <p><strong>基本思想：</strong> </p>
 <ul>
 <li>先将整个待排元素序列分割成若干个子序列（<strong>由相隔某个“增量”的元素组成的</strong>）分别进行直接插入排序，</li>
@@ -192,8 +191,7 @@ static void shellSort4(int[] data){
         }
     }
     printSort(data);
-}
-</code></pre>  
+}</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -372,11 +370,11 @@ static void shellSort4(int[] data){
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -404,11 +402,11 @@ static void shellSort4(int[] data){
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

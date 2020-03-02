@@ -111,8 +111,7 @@
 <p>You may assume that each input would have exactly one solution.</p>
 <p>Example:<br>        Given nums = [2, 7, 11, 15], target = 9,</p>
 <pre><code>Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].
-</code></pre><hr>
+return [0, 1].</code></pre><hr>
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h3><p>1.俩层遍历 暴力穷举<br>时间复杂度 O(N2)<br>空间复杂度 O(1)</p>
 <pre><code>public static int[] twoSum(int[] nums, int target) {
     for (int i = 0; i &lt; nums.length; i++) {
@@ -123,8 +122,7 @@ return [0, 1].
         }
     }
     throw new IllegalArgumentException(&quot;No two sum solution&quot;);
-}
-</code></pre><p>2.hashmap<br>时间复杂度  O(n)<br>空间复杂度  O(n)</p>
+}</code></pre><p>2.hashmap<br>时间复杂度  O(n)<br>空间复杂度  O(n)</p>
 <pre><code>public static int[] twoSum2(int[] nums, int target){
     Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
     for(int i= 0;i&lt;nums.length;i++){
@@ -138,8 +136,7 @@ return [0, 1].
 
     }
      throw new IllegalArgumentException(&quot;No two sum solution&quot;);
-}
-</code></pre><p>3.改进的HashMap<br>时间复杂度  O(n)<br>空间复杂度  O(n)</p>
+}</code></pre><p>3.改进的HashMap<br>时间复杂度  O(n)<br>空间复杂度  O(n)</p>
 <pre><code>public int[] twoSum3(int[] nums, int target) {
     Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
     for (int i = 0; i &lt; nums.length; i++) {
@@ -150,8 +147,7 @@ return [0, 1].
         map.put(nums[i], i);
     }
     throw new IllegalArgumentException(&quot;No two sum solution&quot;);
-}
-</code></pre>  
+}</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -325,11 +321,11 @@ return [0, 1].
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -357,11 +353,11 @@ return [0, 1].
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

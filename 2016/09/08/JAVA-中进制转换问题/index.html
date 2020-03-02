@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="各进制之间的转换java内部封装的方法，十进制转别的 只需要Integer类中to…转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下：   static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。 static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer 实例">
+    <meta name="description" content="各进制之间的转换java内部封装的方法，十进制转别的 只需要Integer类中to…*转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下： *  static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。 static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer">
 <meta name="keywords" content="进制转换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA 中进制转换问题">
 <meta property="og:url" content="http://xwkwh.github.io/2016/09/08/JAVA-中进制转换问题/index.html">
 <meta property="og:site_name" content="邢武坤">
-<meta property="og:description" content="各进制之间的转换java内部封装的方法，十进制转别的 只需要Integer类中to…转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下：   static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。 static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer 实例">
+<meta property="og:description" content="各进制之间的转换java内部封装的方法，十进制转别的 只需要Integer类中to…*转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下： *  static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。 static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-03-02T17:20:26.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA 中进制转换问题">
-<meta name="twitter:description" content="各进制之间的转换java内部封装的方法，十进制转别的 只需要Integer类中to…转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下：   static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。 static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer 实例">
+<meta name="twitter:description" content="各进制之间的转换java内部封装的方法，十进制转别的 只需要Integer类中to…*转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下： *  static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。 static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer">
 
     
     <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
@@ -107,7 +107,7 @@
 		
 		</div>
 		
-		<h2 id="各进制之间的转换"><a href="#各进制之间的转换" class="headerlink" title="各进制之间的转换"></a>各进制之间的转换</h2><p><em>java内部封装的方法，十进制转别的 只需要Integer类中to…</em><br><em>转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下： </em></p>
+		<h2 id="各进制之间的转换"><a href="#各进制之间的转换" class="headerlink" title="各进制之间的转换"></a>各进制之间的转换</h2><p><em>java内部封装的方法，十进制转别的 只需要Integer类中to…</em><br>*转十进制，Integer中的parseInt 或者是 valueOf 方法 二者区别如下： *</p>
 <ul>
 <li>static int parseInt(String s) 将字符串参数作为有符号的十进制整数进行分析。</li>
 <li>static Integer valueOf(int i) 返回一个表示指定的 int 值的 Integer 实例。 </li>
@@ -141,8 +141,7 @@ Integer.valueOf(&quot;0101&quot;,2).toString();
 //二进制转八进制
 Integer.toOctalString(Integer.parseInt(&quot;0101&quot;, 2));
 //二进制转十六进制
-Integer.toHexString(Integer.parseInt(&quot;0101&quot;, 2));
-</code></pre><p>可以看到其他进制之间相互转换，是先转为10进制，然后再转。</p>
+Integer.toHexString(Integer.parseInt(&quot;0101&quot;, 2));</code></pre><p>可以看到其他进制之间相互转换，是先转为10进制，然后再转。</p>
 <h2 id="十进制转成16内进制"><a href="#十进制转成16内进制" class="headerlink" title="十进制转成16内进制"></a>十进制转成16内进制</h2><p> 我自己的，没有用栈</p>
 <pre><code>public static String myBaseString(int num, int base) {
     if (base &gt; 16) {
@@ -156,8 +155,7 @@ Integer.toHexString(Integer.parseInt(&quot;0101&quot;, 2));
     }
     str = str.reverse();
     return str.toString();
-}
-</code></pre><p>  网上的</p>
+}</code></pre><p>  网上的</p>
 <pre><code>public static String baseString(int num, int base) {
     if (base &gt; 16) {
         throw new RuntimeException(&quot;进制数超出范围，base&lt;=16&quot;);
@@ -181,8 +179,7 @@ Integer.toHexString(Integer.parseInt(&quot;0101&quot;, 2));
         str.append(s.pop());
     }
     return str.toString();
-}
-</code></pre><h2 id="任意进制间转换"><a href="#任意进制间转换" class="headerlink" title="任意进制间转换"></a>任意进制间转换</h2><pre><code>public static String baseNum(String num, int srcBase, int destBase) {
+}</code></pre><h2 id="任意进制间转换"><a href="#任意进制间转换" class="headerlink" title="任意进制间转换"></a>任意进制间转换</h2><pre><code>public static String baseNum(String num, int srcBase, int destBase) {
     if (srcBase == destBase) {
         return num;
     }
@@ -199,8 +196,7 @@ Integer.toHexString(Integer.parseInt(&quot;0101&quot;, 2));
         return n + &quot;&quot;;
     }
     return baseString(Integer.valueOf(num), destBase);
-}
-</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code>int i = 10;
+}</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code>int i = 10;
 System.out.println(&quot;十进制数 &quot; + i + &quot; 转换成十六进制为 &quot; + Integer.toHexString(i));
 System.out.println(&quot;十进制数 &quot; + i + &quot; 转换成八进制为 &quot; + Integer.toOctalString(i));
 System.out.println(&quot;十进制数 &quot; + i + &quot; 转换成二进制为 &quot; + Integer.toBinaryString(i));
@@ -236,8 +232,7 @@ System.out.println(baseNum(&quot;1010&quot;, 2, 8));
 
 System.out.println(baseString(10, 16));
 System.out.println(baseString(10, 8));
-System.out.println(baseString(10, 2));
-</code></pre>  
+System.out.println(baseString(10, 2));</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -416,11 +411,11 @@ System.out.println(baseString(10, 2));
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -448,11 +443,11 @@ System.out.println(baseString(10, 2));
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

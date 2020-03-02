@@ -111,8 +111,10 @@
 <h2 id="冒泡排序-三种实现"><a href="#冒泡排序-三种实现" class="headerlink" title="冒泡排序(三种实现)"></a>冒泡排序(三种实现)</h2><p>冒泡排序是非常容易理解和实现，以从小到大排序举例：<br>顾名思义，就是排序时，最大的元素会如同气泡一样移至右端，其利用比较相邻元素的方法，将大的元素交换至右端，<br>所以大的元素会不断的往右移动，直到适当的位置为止。<br>基本的气泡排序法可以利用旗标的方式稍微减少一些比较的时间，当寻访完阵列后都没有发生任何的交换动作，<br>表示排序已经完成，而无需再进行之后的回圈比较与交换动作。</p>
 <p>设数组长度为N。</p>
 <ul>
-<li>1．比较相邻的前后二个数据，如果前面数据大于后面的数据，就将二个数据交换。</li>
-<li>2．这样对数组的第0个数据到N-1个数据进行一次遍历后，最大的一个数据就<br>  “沉”到数组第N-1个位置。</li>
+<li><p>1．比较相邻的前后二个数据，如果前面数据大于后面的数据，就将二个数据交换。</p>
+</li>
+<li><p>2．这样对数组的第0个数据到N-1个数据进行一次遍历后，最大的一个数据就<br>  “沉”到数组第N-1个位置。</p>
+</li>
 <li><p>3．N=N-1，如果N不为0就重复前面二步，否则排序完成。</p>
 </li>
 <li><p>按照定义写</p>
@@ -130,8 +132,7 @@
         }
     }
     printSort(a);
-}
-</code></pre><ul>
+}</code></pre><ul>
 <li>改进  增加一个标志flag  如果有一趟没有发生交换，排序完成</li>
 </ul>
 <pre><code>public static void bubbleSort1 (int[] data){
@@ -147,8 +148,7 @@
         }
         len--;
     }    
-}
-</code></pre><ul>
+}</code></pre><ul>
 <li>改进  假设在某一位后是有序的怎么办  没有必要再每次都比较后面的</li>
 </ul>
 <pre><code>public static void bubbleSort2(int[] data){
@@ -164,8 +164,7 @@
             }
         }
     }
-}
-</code></pre><p>冒泡排序毕竟是一种效率低下的排序方法，在数据规模很小时，可以采用。数据<br>规模比较大时，最好用其它排序方法。</p>
+}</code></pre><p>冒泡排序毕竟是一种效率低下的排序方法，在数据规模很小时，可以采用。数据<br>规模比较大时，最好用其它排序方法。</p>
 <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序是 C.R.A.Hoare 于 1962 年提出的一种划分交换排序。它采用了一种分<br>治的策略，通常称其为分治法(Divide-and-ConquerMethod)。<br><strong>基本思想</strong><br>1．先从数列中取出一个数作为基准数。<br>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它<br>的左边。<br>3．再对左右区间重复第二步，直到各区间只有一个数。<br>虽然快速排序称为分治法，但分治法这三个字显然无法很好的概括快速排序的全<br>部步骤。因此我的对快速排序作了进一步的说明： <strong>挖坑填数+分治法</strong></p>
 <pre><code>public static void quickSort1(int[] data, int left, int right) {
     if (left &lt; right) {
@@ -183,8 +182,7 @@
         quickSort1(data, left,  i - 1);
         quickSort1(data, i + 1, right);
     }
-}
-</code></pre>  
+}</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -363,11 +361,11 @@
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -395,11 +393,11 @@
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

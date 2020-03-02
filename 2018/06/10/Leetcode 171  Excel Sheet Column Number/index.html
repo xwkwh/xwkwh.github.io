@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="Leetcode 171  Excel Sheet Column Number把excel 的sheet表示成数字 For example 1234567A -&amp;gt; 1B -&amp;gt; 2C -&amp;gt; 3...Z -&amp;gt; 26AA -&amp;gt; 27AB -&amp;gt; 28 类似与二进制转十进制，相当于26进制转换 Go: 123456789func titleToNumber(s strin">
+    <meta name="description" content="Leetcode 171  Excel Sheet Column Number把excel 的sheet表示成数字 For example 1234567A -&amp;gt; 1B -&amp;gt; 2C -&amp;gt; 3...Z -&amp;gt; 26AA -&amp;gt; 27AB -&amp;gt; 28  类似与二进制转十进制，相当于26进制转换 Go: 123456789func titleToNumber(s stri">
 <meta name="keywords" content="Leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode 171  Excel Sheet Column Number">
 <meta property="og:url" content="http://xwkwh.github.io/2018/06/10/Leetcode 171  Excel Sheet Column Number/index.html">
 <meta property="og:site_name" content="邢武坤">
-<meta property="og:description" content="Leetcode 171  Excel Sheet Column Number把excel 的sheet表示成数字 For example 1234567A -&amp;gt; 1B -&amp;gt; 2C -&amp;gt; 3...Z -&amp;gt; 26AA -&amp;gt; 27AB -&amp;gt; 28 类似与二进制转十进制，相当于26进制转换 Go: 123456789func titleToNumber(s strin">
+<meta property="og:description" content="Leetcode 171  Excel Sheet Column Number把excel 的sheet表示成数字 For example 1234567A -&amp;gt; 1B -&amp;gt; 2C -&amp;gt; 3...Z -&amp;gt; 26AA -&amp;gt; 27AB -&amp;gt; 28  类似与二进制转十进制，相当于26进制转换 Go: 123456789func titleToNumber(s stri">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-03-02T17:20:26.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 171  Excel Sheet Column Number">
-<meta name="twitter:description" content="Leetcode 171  Excel Sheet Column Number把excel 的sheet表示成数字 For example 1234567A -&amp;gt; 1B -&amp;gt; 2C -&amp;gt; 3...Z -&amp;gt; 26AA -&amp;gt; 27AB -&amp;gt; 28 类似与二进制转十进制，相当于26进制转换 Go: 123456789func titleToNumber(s strin">
+<meta name="twitter:description" content="Leetcode 171  Excel Sheet Column Number把excel 的sheet表示成数字 For example 1234567A -&amp;gt; 1B -&amp;gt; 2C -&amp;gt; 3...Z -&amp;gt; 26AA -&amp;gt; 27AB -&amp;gt; 28  类似与二进制转十进制，相当于26进制转换 Go: 123456789func titleToNumber(s stri">
 
     
     <link rel="alternative" href="/atom.xml" title="邢武坤" type="application/atom+xml">
@@ -110,9 +110,11 @@
 		<h2 id="Leetcode-171-Excel-Sheet-Column-Number"><a href="#Leetcode-171-Excel-Sheet-Column-Number" class="headerlink" title="Leetcode 171  Excel Sheet Column Number"></a>Leetcode 171  Excel Sheet Column Number</h2><p>把excel 的sheet表示成数字</p>
 <p>For example</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A -&gt; 1</span><br><span class="line">B -&gt; 2</span><br><span class="line">C -&gt; 3</span><br><span class="line">...</span><br><span class="line">Z -&gt; 26</span><br><span class="line">AA -&gt; 27</span><br><span class="line">AB -&gt; 28</span><br></pre></td></tr></table></figure>
+
 <p>类似与二进制转十进制，相当于26进制转换</p>
 <p>Go:</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">titleToNumber</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	l := <span class="built_in">len</span>(s)</span><br><span class="line">	res := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i :=<span class="number">0</span> ; i &lt;l ; i++ &#123;</span><br><span class="line">		num := (<span class="keyword">int</span>)(s[i]-<span class="string">'A'</span>+<span class="number">1</span>)</span><br><span class="line">		res = num + res * <span class="number">26</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>  res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -292,11 +294,11 @@
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -324,11 +326,11 @@
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

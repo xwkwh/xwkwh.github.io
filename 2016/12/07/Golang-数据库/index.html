@@ -109,8 +109,7 @@
 		
 		<h2 id="database-sql-接口"><a href="#database-sql-接口" class="headerlink" title="database/sql 接口"></a>database/sql 接口</h2><p>Go没有官方提供数据库驱动，而是为开发者开发数据库驱动定义了一些标准接口，开发者可以根据定义的接口来开发相应的数据库驱动<br>    <strong>好处</strong>：只要按照标准接口开发的代码，以后需要迁移数据库时，不需要任何修改。</p>
 <h3 id="sql-Register"><a href="#sql-Register" class="headerlink" title="sql.Register"></a>sql.Register</h3><p>用来注册数据库驱动<br>第三方数据库驱动开发是，都要实现init函数，在init函数里面会调用</p>
-<pre><code>sql.Register(name string,driver driver.Driver)
-</code></pre><p>完成驱动注册</p>
+<pre><code>sql.Register(name string,driver driver.Driver)</code></pre><p>完成驱动注册</p>
 <p>例如：sqlite3、mymysql的驱动注册</p>
 <pre><code>//https://github.com/mattn/go-sqlite3 驱动
 func init() {
@@ -122,29 +121,24 @@ var d = Driver{proto: &quot;tcp&quot;, raddr: &quot;127.0.0.1:3306&quot;}
 func init() {
 Register(&quot;SET NAMES utf8&quot;)
 sql.Register(&quot;mymysql&quot;, &amp;d)
-}
-</code></pre><p>在 database/sql 内部通过一个 map 来存储用户定义的相应驱动</p>
+}</code></pre><p>在 database/sql 内部通过一个 map 来存储用户定义的相应驱动</p>
 <pre><code>var drivers = make(map[string]driver.Driver)
 
-drivers[name] = driver
-</code></pre><p>因此通过database/sql 的注册函数可以同时注册多个数据库驱动，只要不重复</p>
+drivers[name] = driver</code></pre><p>因此通过database/sql 的注册函数可以同时注册多个数据库驱动，只要不重复</p>
 <p>使用【import _ 包路径】只是引用该包，仅仅是为了调用init()函数，所以无法通过包名来调用包中的其他函数</p>
 <pre><code>import (
 &quot;database/sql&quot;
 _ &quot;github.com/mattn/go-sqlite3&quot;
-)
-</code></pre><h3 id="driver-Driver"><a href="#driver-Driver" class="headerlink" title="driver.Driver"></a>driver.Driver</h3><p>Driver是一个数据库驱动的接口<br>定义了一个方法： Open(name string) 返回一个数据库的Conn接口</p>
+)</code></pre><h3 id="driver-Driver"><a href="#driver-Driver" class="headerlink" title="driver.Driver"></a>driver.Driver</h3><p>Driver是一个数据库驱动的接口<br>定义了一个方法： Open(name string) 返回一个数据库的Conn接口</p>
 <pre><code>type Driver interface {
      Open(name string) (Conn, error)
-}
-</code></pre><p>返回的Conn只能执行一次goroutine操作，就是说不能把这个Conn应用于多个goroutine里面</p>
+}</code></pre><p>返回的Conn只能执行一次goroutine操作，就是说不能把这个Conn应用于多个goroutine里面</p>
 <h3 id="driver-Conn"><a href="#driver-Conn" class="headerlink" title="driver.Conn"></a>driver.Conn</h3><p>Conn 是一个数据库连接的接口定义，定义了一系列方法</p>
 <pre><code>type Conn interface {
     Prepare(query string) (Stmt, error)
     Close() error
     Begin() (Tx, error)
-}
-</code></pre><p>Prepare函数返回与当前连接相关的执行 Sql 语句的准备状态，可以进行查询、删除等操作。</p>
+}</code></pre><p>Prepare函数返回与当前连接相关的执行 Sql 语句的准备状态，可以进行查询、删除等操作。</p>
 <p>Close 函数关闭当前的连接，执行释放连接拥有的资源等清理工作。因为驱动实现了<br>database/sql 里面建议的conn pool，所以你不用再去实现缓存 conn 之类的，这样会容易<br>引起问题。</p>
 <p>Begin 函数返回一个代表事务处理的 Tx，通过它你可以进行查询,更新等操作，或者对事务<br>进行回滚、递交</p>
 <h3 id="driver-Stmt"><a href="#driver-Stmt" class="headerlink" title="driver.Stmt"></a>driver.Stmt</h3><p>Stmt是一种准备好的状态，和Conn 相关联，而且只能应用于一个 goroutine 中，不能应<br>用于多个goroutine</p>
@@ -153,8 +147,7 @@ _ &quot;github.com/mattn/go-sqlite3&quot;
     NumInput() int
     Exec(args []Value) (Result, error)
     Query(args []Value) (Rows, error)
-}
-</code></pre><p>Close 函数关闭当前的链接状态，但是如果当前正在执行 query，query 还是有效返回 rows<br>数据。</p>
+}</code></pre><p>Close 函数关闭当前的链接状态，但是如果当前正在执行 query，query 还是有效返回 rows<br>数据。</p>
 <p>NumInput 函数返回当前预留参数的个数，当返回&gt;=0时数据库驱动就会智能检查调用者的<br>参数。当数据库驱动包不知道预留参数的时候，返回-1。</p>
 <p>Exec 函数执行Prepare准备好的sql，传入参数执行update/insert 等操作，<strong>返回 Result 数<br>据</strong></p>
 <p>Query 函数执行Prepare准备好的 sql，传入需要的参数执行 select 操作，<strong>返回 Rows 结果<br>集</strong></p>
@@ -162,51 +155,42 @@ _ &quot;github.com/mattn/go-sqlite3&quot;
 <pre><code>type Tx interface {
     Commit() error
     Rollback() error
-}
-</code></pre><p>Commit 递交一个事务<br>Rollback 回滚一个事务</p>
+}</code></pre><p>Commit 递交一个事务<br>Rollback 回滚一个事务</p>
 <p>数据库事务：对数据库所做的一系列修改，<strong>在修改过程中，暂时不写入数据库，而是缓存起来</strong>，用户在自己的终端可以预览变化，直到全部修改完成，并经过检查确认无误后，<strong>一次性提交并写入数据库</strong>，在提交之前，必要的话所做的修改<strong>都可以取消</strong>。提交之后，就不能撤销，提交成功后其他用户才可以通过查询浏览数据的变化。</p>
 <h3 id="driver-Execer"><a href="#driver-Execer" class="headerlink" title="driver.Execer"></a>driver.Execer</h3><p>Conn 可选择实现的一个接口</p>
 <pre><code>type Execer interface {
     Exec(query string, args []Value) (Result, error)
-}
-</code></pre><p>如果这个接口没有定义，那么在调用DB.Exec 就会先调用Prepare 返回Stmt，然后执行Stmt的Exec，然后关闭Stmt</p>
+}</code></pre><p>如果这个接口没有定义，那么在调用DB.Exec 就会先调用Prepare 返回Stmt，然后执行Stmt的Exec，然后关闭Stmt</p>
 <h3 id="driver-Result"><a href="#driver-Result" class="headerlink" title="driver.Result"></a>driver.Result</h3><p>Update/insert 等操作返回的结果接口定义</p>
 <pre><code>type Result interface {
     LastInsertId() (int64, error)  //返回由数据库执行插入操作得到的自增 ID 号
     RowsAffected() (int64, error)  //返回 query 操作影响的数据条目数
-}
-</code></pre><h3 id="driver-Rows"><a href="#driver-Rows" class="headerlink" title="driver.Rows"></a>driver.Rows</h3><p>执行查询返回的结果接口定义</p>
+}</code></pre><h3 id="driver-Rows"><a href="#driver-Rows" class="headerlink" title="driver.Rows"></a>driver.Rows</h3><p>执行查询返回的结果接口定义</p>
 <pre><code>type Rows interface {
     Columns() []string
     Close() error
     Next(dest []Value) error
-}
-</code></pre><p>Columns 函数返回查询数据库表的字段信息，这个返回的slice <strong>和 sql 查询的字段</strong>一一对应，<br>而不是返回整个表的所有字段。</p>
+}</code></pre><p>Columns 函数返回查询数据库表的字段信息，这个返回的slice <strong>和 sql 查询的字段</strong>一一对应，<br>而不是返回整个表的所有字段。</p>
 <p>Close 函数用来关闭Rows迭代器。</p>
 <p>Next函数用来返回下一条数据，把数据赋值给 dest。dest里面的元素必须是driver.Value的<br>值除了string，返回的数据里面所有的 string都必须要转换成[]byte。如果最后没数据了，<br>Next函数最后返回 io.EOF</p>
 <h3 id="driver-RowsAffected"><a href="#driver-RowsAffected" class="headerlink" title="driver.RowsAffected"></a>driver.RowsAffected</h3><pre><code>type RowsAffected int64
 func (RowsAffected) LastInsertId() (int64, error)
-func (v RowsAffected) RowsAffected() (int64, error)
-</code></pre><p>其实就是int64 的别名，但是实现了Result接口，用来底层实现Result的表示方式</p>
+func (v RowsAffected) RowsAffected() (int64, error)</code></pre><p>其实就是int64 的别名，但是实现了Result接口，用来底层实现Result的表示方式</p>
 <h3 id="driver-Value"><a href="#driver-Value" class="headerlink" title="driver.Value"></a>driver.Value</h3><p>Value其实就是一个<strong>空接口</strong>，他可以容纳<strong>任何的数据</strong></p>
-<pre><code>type Value interface{}
-</code></pre><p>drive的Value是驱动必须能够操作的Value，Value要么<strong>是 nil，要么是下面的任意一种</strong></p>
+<pre><code>type Value interface{}</code></pre><p>drive的Value是驱动必须能够操作的Value，Value要么<strong>是 nil，要么是下面的任意一种</strong></p>
 <pre><code>int64
 float64
 bool
 []byte
 string [*]除了Rows.Next 返回的不能是 string.
-time.Time
-</code></pre><h3 id="driver-ValueConverter"><a href="#driver-ValueConverter" class="headerlink" title="driver.ValueConverter"></a>driver.ValueConverter</h3><p>ValueConverter 接口定义了如何把一个普通的值转化成 driver.Value的接口</p>
+time.Time</code></pre><h3 id="driver-ValueConverter"><a href="#driver-ValueConverter" class="headerlink" title="driver.ValueConverter"></a>driver.ValueConverter</h3><p>ValueConverter 接口定义了如何把一个普通的值转化成 driver.Value的接口</p>
 <pre><code>type ValueConverter interface {
      ConvertValue(v interface{}) (Value, error)
-}
-</code></pre><p>在开发的数据库驱动包里面实现这个接口的函数在很多地方会使用到，这个ValueConverter 有很多<strong>好处</strong>：<br>• 转化driver.value到数据库表相应的字段，例如 int64 的数据如何转化成数据库表uint16字段<br>• 把数据库查询结果转化成driver.Value值<br>• 在scan 函数里面如何把 dirve.Value 值转化成用户定义的值</p>
+}</code></pre><p>在开发的数据库驱动包里面实现这个接口的函数在很多地方会使用到，这个ValueConverter 有很多<strong>好处</strong>：<br>• 转化driver.value到数据库表相应的字段，例如 int64 的数据如何转化成数据库表uint16字段<br>• 把数据库查询结果转化成driver.Value值<br>• 在scan 函数里面如何把 dirve.Value 值转化成用户定义的值</p>
 <h3 id="driver-Valuer"><a href="#driver-Valuer" class="headerlink" title="driver.Valuer"></a>driver.Valuer</h3><p>Valuer 接口定义了返回一个 driver.Value 的方式</p>
 <pre><code>type Valuer interface {
     Value() (Value, error)
-}
-</code></pre><p>很多类型都实现了这个Value方法，用来自身与 driver.Value 的转化。<br>通过上面的讲解，你应该对于驱动的开发有了一个基本的了解，一个驱动只要实现了<strong>这些<br>接口就能完成增删查改等基本操作了</strong>，剩下的就是与相应的数据库进行数据交互等细节问<br>题了，在此不再赘述。</p>
+}</code></pre><p>很多类型都实现了这个Value方法，用来自身与 driver.Value 的转化。<br>通过上面的讲解，你应该对于驱动的开发有了一个基本的了解，一个驱动只要实现了<strong>这些<br>接口就能完成增删查改等基本操作了</strong>，剩下的就是与相应的数据库进行数据交互等细节问<br>题了，在此不再赘述。</p>
 <h3 id="database-sql"><a href="#database-sql" class="headerlink" title="database/sql"></a>database/sql</h3><p>database/sql 在database/sql/driver 提供的接口基础上定义了一些更高阶的方法，用以简<br>化数据库操作,同时内部还建议性地实现一个 conn pool。</p>
 <pre><code>type DB struct {
     driver driver.Driver
@@ -214,8 +198,7 @@ time.Time
     mu sync.Mutex // protects freeConn and closed
     freeConn []driver.Conn
     closed bool
-}
-</code></pre><p>我们可以看到Open 函数返回的是 DB 对象，里面有一个 freeConn，它就是那个简易的连<br>接池。它的实现相当简单或者说简陋，就是当执行 Db.prepare 的时候会 defer<br>db.putConn(ci, err) ,也就是把这个连接放入连接池，每次调用 conn 的时候会先判断<br>freeConn 的长度是否大于0，大于0说明有可以复用的 conn，直接拿出来用就是了，如果<br>不大于0，则创建一个conn,然后再返回之。</p>
+}</code></pre><p>我们可以看到Open 函数返回的是 DB 对象，里面有一个 freeConn，它就是那个简易的连<br>接池。它的实现相当简单或者说简陋，就是当执行 Db.prepare 的时候会 defer<br>db.putConn(ci, err) ,也就是把这个连接放入连接池，每次调用 conn 的时候会先判断<br>freeConn 的长度是否大于0，大于0说明有可以复用的 conn，直接拿出来用就是了，如果<br>不大于0，则创建一个conn,然后再返回之。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -395,11 +378,11 @@ time.Time
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -427,11 +410,11 @@ time.Time
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -111,13 +111,17 @@
 <h1 id="Base"><a href="#Base" class="headerlink" title="Base"></a>Base</h1><p><a id="orgf8f1226"></a></p>
 <h2 id="chsh-change-shell"><a href="#chsh-change-shell" class="headerlink" title="chsh change shell"></a>chsh change shell</h2><p><a id="org0b6ca4c"></a></p>
 <h3 id="To-Know-shells-installed"><a href="#To-Know-shells-installed" class="headerlink" title="To Know shells installed"></a>To Know shells installed</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat /etc/shells</span><br><span class="line"><span class="meta">#</span> List of acceptable shells for chpass(1).</span><br><span class="line"><span class="meta">#</span> Ftpd will not allow users to connect who are not using</span><br><span class="line"><span class="meta">#</span> one of these shells.</span><br><span class="line"></span><br><span class="line">/bin/bash</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+
 <p><a id="org782e898"></a></p>
 <h3 id="check-current-shell"><a href="#check-current-shell" class="headerlink" title="check current shell"></a>check current shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> echo $SHELL</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+
 <p><a id="org87c17c9"></a></p>
 <h3 id="change-shell-in-all-environment"><a href="#change-shell-in-all-environment" class="headerlink" title="change shell in all environment"></a>change shell in all environment</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> chsh -s /bin/zsh</span><br><span class="line">Changing shell for xwk.</span><br><span class="line">Password for xwk:</span><br><span class="line">chsh: no changes made</span><br></pre></td></tr></table></figure>
+
 <p><a id="org6705c7e"></a></p>
 <h2 id="export-change-environment-variable"><a href="#export-change-environment-variable" class="headerlink" title="export: change environment variable"></a>export: change environment variable</h2><p><a id="org7814e86"></a></p>
 <h3 id="export-output-all-environment-variable"><a href="#export-output-all-environment-variable" class="headerlink" title="export output all environment variable"></a>export output all environment variable</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> export</span><br><span class="line">CLICOLOR=1</span><br><span class="line">COLORFGBG='7;0'</span><br><span class="line">COLORTERM=truecolor</span><br><span class="line">COMMAND_MODE=unix2003</span><br><span class="line">GOBIN=/Users/xwk/gopath/bin</span><br><span class="line">GOPATH=/Users/xwk/gopath</span><br><span class="line">GOROOT=/usr/local/go</span><br><span class="line">HOME=/Users/xwk</span><br><span class="line">HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles</span><br><span class="line">HOMEBREW_NO_AUTO_UPDATE=1</span><br><span class="line">ITERM_PROFILE=Default</span><br><span class="line">ITERM_SESSION_ID=w0t1p0:5212F532-B525-4B5D-BB6E-238806196C29</span><br><span class="line">LANG=zh_CN.UTF-8</span><br><span class="line">LC_ALL=zh_CN.UTF-8</span><br><span class="line">LC_TERMINAL=iTerm2</span><br><span class="line">LC_TERMINAL_VERSION=3.3.7beta1</span><br><span class="line">LESS=-R</span><br><span class="line">LOGNAME=xwk</span><br><span class="line">LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD</span><br><span class="line">LaunchInstanceID=3E754314-9261-4388-9A0E-2FC388411C15</span><br><span class="line">OLDPWD=/Users/xwk</span><br><span class="line">PAGER=less</span><br><span class="line">PATH='/Applications/MacVim.app/Contents/bin:/bin:/usr/bin:/usr/local/bin:/Applications/MacVim.app/Contents/bin:/bin:/usr/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/Users/xwk/gopath/bin:/Users/xwk/.fzf/bin:/Users/xwk/gopath/bin'</span><br><span class="line">PWD=/etc</span><br><span class="line">SECURITYSESSIONID=18778</span><br><span class="line">SHELL=/bin/zsh</span><br><span class="line">SHLVL=2</span><br></pre></td></tr></table></figure>
+
 <p><a id="orgc2ef8c0"></a></p>
 <h3 id="Difference-of-env-set-export-declare"><a href="#Difference-of-env-set-export-declare" class="headerlink" title="Difference of env/set/export/declare"></a>Difference of env/set/export/declare</h3><ol>
 <li><p>shell variabel</p>
@@ -143,16 +147,21 @@
 </ol>
 <p><a id="orge5bd0e9"></a></p>
 <h3 id="set-environment-variable"><a href="#set-environment-variable" class="headerlink" title="set environment variable"></a>set environment variable</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/bin</span><br></pre></td></tr></table></figure>
+
 <p><a id="org14e1c49"></a></p>
 <h3 id="Roles-of-export"><a href="#Roles-of-export" class="headerlink" title="Roles of export"></a>Roles of export</h3><p>set environment variable</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> guopu=123</span><br><span class="line"><span class="meta">$</span> echo $guopu</span><br><span class="line">123</span><br><span class="line"><span class="meta">$</span> xwk=456</span><br><span class="line"><span class="meta">$</span> echo $xwk</span><br><span class="line">456</span><br><span class="line"><span class="meta">$</span> export guopu</span><br><span class="line"><span class="meta">$</span> dash</span><br><span class="line"><span class="meta">$</span> echo $guopu</span><br><span class="line">123</span><br><span class="line"><span class="meta">$</span> echo $xwk</span><br></pre></td></tr></table></figure>
+
 <p><a id="org383f21b"></a></p>
 <h2 id="read"><a href="#read" class="headerlink" title="read"></a>read</h2><p><a id="orga409d2d"></a></p>
 <h3 id="listen-from-keyboard"><a href="#listen-from-keyboard" class="headerlink" title="listen from keyboard"></a>listen from keyboard</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">read -p "Please input your name and age:" name age</span><br><span class="line">echo "Welcome !!! $name is $age"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
 <p><a id="orge179e6b"></a></p>
 <h3 id="read-but-time-limit"><a href="#read-but-time-limit" class="headerlink" title="read but time limit"></a>read but time limit</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">if read -t 3 -p "Please input your name and age within 3s:" name age</span><br><span class="line">then</span><br><span class="line">    echo "Welcome !!! $name is $age"</span><br><span class="line">else</span><br><span class="line">    echo "Sorry too slow!"</span><br><span class="line">fi</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
 <p><a id="orga8fa29f"></a></p>
 <h3 id="password-input"><a href="#password-input" class="headerlink" title="password input"></a>password input</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read  -s -p "Plese input passwd: " passwd</span><br><span class="line">echo "you input: $passwd"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
 <p><a id="org01314bb"></a></p>
 <h3 id="read-from-file"><a href="#read-from-file" class="headerlink" title="read from file"></a>read from file</h3><ul>
 <li>&amp;- close standard output eg: file fd</li>
@@ -166,6 +175,7 @@
 </li>
 <li><p>Solution 3: redirect &lt;</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">count=0</span><br><span class="line">while read line</span><br><span class="line">do</span><br><span class="line">    let count=$count+1</span><br><span class="line">    echo "Line $count: $line"</span><br><span class="line">done &lt; test.sh</span><br><span class="line">echo "count: $count"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <p><a id="orgb3ffd96"></a></p>
@@ -173,6 +183,7 @@
 <p><a id="org1a4d11f"></a></p>
 <h2 id="expr-calculation"><a href="#expr-calculation" class="headerlink" title="expr: calculation"></a>expr: calculation</h2><p><a id="org2a6f738"></a></p>
 <h3 id><a href="#" class="headerlink" title="+-*/"></a>+-*/</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">expr 10 + 10</span><br><span class="line">expr 20 - 10</span><br><span class="line">expr 30 / 10</span><br><span class="line"><span class="meta">#</span> * is the special character</span><br><span class="line">expr 10 \* 3 </span><br><span class="line">expr \( 3 + 3 \) \* 3 + 10</span><br></pre></td></tr></table></figure>
+
 <p><a id="org8102cf9"></a></p>
 <h3 id="operate-string"><a href="#operate-string" class="headerlink" title="operate string"></a>operate string</h3><table>
 <thead>
@@ -182,8 +193,7 @@
 <th>意义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>match</td>
 <td>match STRING REGEXP</td>
 <td>STRING中匹配REGEXP的字符串返回匹配的长度</td>
@@ -203,8 +213,7 @@
 <td>length STRING</td>
 <td>字符串的长度</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><a id="org7009b46"></a></p>
 <h2 id="tmux-multi-windows-and-session"><a href="#tmux-multi-windows-and-session" class="headerlink" title="tmux: multi windows and session"></a>tmux: multi windows and session</h2><p>Terminal MultipleXer</p>
 <p><a id="org5d56712"></a></p>
@@ -249,8 +258,7 @@
 <th>comment</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>pane</td>
 <td>%</td>
 <td>split horizon</td>
@@ -340,11 +348,10 @@
 <td>f</td>
 <td>search window</td>
 </tr>
-</tbody>
-</table>
-<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s foo # 新建名称为 foo 的会话</span><br><span class="line">tmux ls # 列出所有 tmux 会话</span><br><span class="line">tmux a # 恢复至上一次的会话</span><br><span class="line">tmux a -t foo # 恢复名称为 foo 的会话，会话默认名称为数字</span><br><span class="line">tmux kill-session -t foo # 删除名称为 foo 的会话</span><br><span class="line">tmux kill-server # 删除所有的会话</span><br></pre></td></tr></table></figure>
-</code></pre><p><a id="org7606d0f"></a></p>
+</tbody></table>
+<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s foo # 新建名称为 foo 的会话</span><br><span class="line">tmux ls # 列出所有 tmux 会话</span><br><span class="line">tmux a # 恢复至上一次的会话</span><br><span class="line">tmux a -t foo # 恢复名称为 foo 的会话，会话默认名称为数字</span><br><span class="line">tmux kill-session -t foo # 删除名称为 foo 的会话</span><br><span class="line">tmux kill-server # 删除所有的会话</span><br></pre></td></tr></table></figure></code></pre><p><a id="org7606d0f"></a></p>
 <h2 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> set alias</span><br><span class="line">alias name=value # = before and after don't have space</span><br><span class="line"><span class="meta">#</span> show all alias</span><br><span class="line">alias</span><br><span class="line">alias gomodon</span><br><span class="line"><span class="meta">#</span> delete alias</span><br><span class="line">unalias vi</span><br><span class="line">unalias -a # delete all</span><br></pre></td></tr></table></figure>
+
 <p><a id="orgd89e14d"></a></p>
 <h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><ul>
 <li>show time export HISTTIMEFORMAT=’%F %T’</li>
@@ -356,16 +363,21 @@
 <p><a id="org8205424"></a></p>
 <h3 id="pipleline"><a href="#pipleline" class="headerlink" title="pipleline"></a>pipleline</h3><p>pipleline can use pre input as after input but cann’t use it as arguments eg:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ echo test.log | cat</span><br><span class="line">test.log</span><br><span class="line">➜  ~ echo test.log | xargs cat</span><br><span class="line">hello luojilab</span><br></pre></td></tr></table></figure>
+
 <p>xargs default see ‘enter tab space’ as space use ‘xargs -0 ‘can change it as NULL</p>
 <p><a id="org1657276"></a></p>
 <h3 id="xargs-p-y-n"><a href="#xargs-p-y-n" class="headerlink" title="xargs -p :y/n"></a>xargs -p :y/n</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ echo test.log | xargs -p cat</span><br><span class="line">cat test.log ?...y</span><br><span class="line">hello luojilab</span><br></pre></td></tr></table></figure>
+
 <p><a id="org113d414"></a></p>
 <h3 id="xargs-E-quit"><a href="#xargs-E-quit" class="headerlink" title="xargs -E quit"></a>xargs -E quit</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ cat test.log</span><br><span class="line">hello he hhh yy</span><br><span class="line">➜  ~ cat test.log| xargs -E "hhh" echo</span><br><span class="line">hello he</span><br></pre></td></tr></table></figure>
+
 <p><a id="orgb2ef30d"></a></p>
 <h2 id="time"><a href="#time" class="headerlink" title="time"></a>time</h2><p><a id="orgefa19d4"></a></p>
 <h3 id="time-a-simple-command-or-give-resource-usage"><a href="#time-a-simple-command-or-give-resource-usage" class="headerlink" title="time a simple command or give resource usage"></a>time a simple command or give resource usage</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@BJ-DEV-GO ledgers]# time grep mockUids ledgers.log</span><br><span class="line"></span><br><span class="line">real	0m0.164s</span><br><span class="line">user	0m0.099s</span><br><span class="line">sys	0m0.046s</span><br></pre></td></tr></table></figure>
+
 <p><a id="orgd97a4ee"></a></p>
 <h2 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> date;sleep 30s;date</span><br><span class="line">2020年 3月 1日 星期日 16时16分41秒 CST</span><br><span class="line">2020年 3月 1日 星期日 16时17分11秒 CST</span><br></pre></td></tr></table></figure>
+
 <p><a id="orgc9fd929"></a></p>
 <h1 id="FIle"><a href="#FIle" class="headerlink" title="FIle"></a>FIle</h1><p><a id="org3c69f43"></a></p>
 <h1 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h1>  
@@ -539,11 +551,11 @@
 			
 		
 			
-				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进制转换/" title="进制转换">进制转换<sup>1</sup></a></li>
+				<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
 			
 		
 			
@@ -571,11 +583,11 @@
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/进程/" title="进程">进程<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 		</ul>
